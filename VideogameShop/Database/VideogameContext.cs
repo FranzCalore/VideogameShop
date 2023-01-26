@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using VideogameShop.Models;
 
 namespace VideogameShop.Database
 {
