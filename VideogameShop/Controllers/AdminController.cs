@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.SqlServer.Server;
+using VideogameShop.Database;
+using VideogameShop.Models;
 
 namespace VideogameShop.Controllers
 {
@@ -8,34 +12,70 @@ namespace VideogameShop.Controllers
         // GET: AdminController
         public ActionResult Index()
         {
-            return View();
+            using (VideogameContext db = new VideogameContext())
+            {
+                List<Videogioco> ListaVideogiochi = db.Videogiochi.ToList<Videogioco>();
+                return View("Index", ListaVideogiochi);
+            }
         }
 
-        // GET: AdminController/Details/5
-        public ActionResult Details(int id)
+        // GET: AdminController/Dettagli/5
+        public ActionResult Dettagli(int id)
         {
-            return View();
+            using (VideogameContext db = new VideogameContext())
+            {
+                // LINQ: syntax methos
+                Videogioco VideogiocoTrovato = db.Videogiochi
+                    .Where(DbVideogioco => DbVideogioco.Id == id)
+                    .Include(videogioco => videogioco.Tipologia)
+                    .FirstOrDefault();
+
+                if (VideogiocoTrovato != null)
+                {
+                    return View(VideogiocoTrovato);
+                }
+
+                return NotFound("Mario, sembra che il tuo videogioco sia in un altro castello!");
+            }
         }
 
-        // GET: AdminController/Create
-        public ActionResult Create()
+        // GET: AdminController/Crea
+        public ActionResult Crea()
         {
-            return View();
+            using (VideogameContext db = new VideogameContext())
+            {
+                List<Tipologia> TipologieDb = db.Tipologie.ToList<Tipologia>();
+
+                VideogiocoCategoriaView ViewModello = new VideogiocoCategoriaView();
+                ViewModello.Videogioco = new Videogioco();
+
+                ViewModello.Tipologie = TipologieDb;
+
+                return View("Crea", ViewModello);
+            }
         }
 
         // POST: AdminController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Crea(VideogiocoCategoriaView dataForm)
         {
-            try
+            using (VideogameContext db = new VideogameContext())
+            { 
+                if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                    List<Tipologia> tipologie = db.Tipologie.ToList<Tipologia>();
+
+                    dataForm.Tipologie = tipologie;
+
+                return View("Crea", dataForm);
             }
-            catch
-            {
-                return View();
+
+                db.Videogiochi.Add(dataForm.Videogioco);
+                db.SaveChanges();
             }
+
+            return RedirectToAction("Index");
         }
 
         // GET: AdminController/Edit/5
