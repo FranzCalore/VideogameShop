@@ -95,25 +95,23 @@ namespace VideogameShop.Controllers
             return RedirectToAction("Index");
     }
 
-        // GET: AdminController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         // POST: AdminController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Elimina(int id)
         {
-            try
+            VideogameContext db = new VideogameContext();
+            Videogioco videogioco = (from v in db.Videogiochi where v.Id == id select v).FirstOrDefault();
+            if (videogioco is null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound("Mario, sembra che il tuo videogioco sia in un altro castello!");
             }
-            catch
+            else
             {
-                return View();
+                db.Remove(videogioco);
+                db.SaveChanges();
             }
+            return RedirectToAction("Index");
         }
     }
 }
