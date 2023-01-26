@@ -1,0 +1,38 @@
+﻿@model List<Videogioco>
+
+@if (Model.Count == 0)
+{
+    <h3>Non sono presenti Videogiochi nel Db</h3>
+}
+else
+{
+    <main class="container">
+        <a class="btn btn-primary" href="@Url.Action("Crea","Admin")">Aggiungi Videogioco</a>
+        <h1>Lista Videogiochi</h1>
+        <table class="table table-hover my-5">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col"></th>
+                    <th scope="col">Tipologia</th>
+                    <th scope="col">Prezzo</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Videogioco videogioco in Model)
+                {
+                    <tr>
+                        <td><a href="@Url.Action("Dettagli","Admin",new{id=videogioco.Id})">@videogioco.Nome</a></td>
+                        <td><img src="@videogioco.Foto" class="img-fluid" alt="@videogioco.Nome" width="300"></td>
+                        <td>@videogioco.Tipologia</td>
+                        <td>@videogioco.Prezzo €</td>
+                        <td><a class="btn btn-primary" href="@Url.Action("Modifica","Admin", new{id=videogioco.Id})">Modifica Pizza</a></td>
+                        <td><a class="btn btn-danger" href="@Url.Action("Elimina","Admin", new{id=videogioco.Id})">Elimina Pizza</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>       
+    </main>
+}
