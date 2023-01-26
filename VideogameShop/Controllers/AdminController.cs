@@ -42,7 +42,7 @@ namespace VideogameShop.Controllers
             }
         }
 
-        // GET: AdminController/Edit/5
+        [HttpGet]
         public ActionResult Modifica(int id)
         {
             using (VideogameContext db = new VideogameContext())
