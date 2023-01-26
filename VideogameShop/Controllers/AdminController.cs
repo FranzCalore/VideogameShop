@@ -78,46 +78,76 @@ namespace VideogameShop.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: AdminController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult Modifica(int id)
         {
-            return View();
+            using (VideogameContext db = new VideogameContext())
+            {
+                Videogioco? videogioco = db.Videogiochi.Where(v => v.Id == id).FirstOrDefault();
+                if (videogioco != null)
+                {
+                    List<Tipologia> tipologie = db.Tipologie.ToList();
+                    VideogiocoCategoriaView modelloView = new()
+                    {
+                        Videogioco = videogioco,
+                        Tipologie = tipologie
+                    };
+                    return View("Modifica", modelloView);
+                }
+                else
+                {
+                    return NotFound("Mario, sembra che il tuo videogioco sia in un altro castello!");
+                }
+
+            }
         }
 
-        // POST: AdminController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Modifica(int id, VideogiocoCategoriaView formData)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                using VideogameContext db = new();
+                List<Tipologia> tipologie = db.Tipologie.ToList();
+                formData.Tipologie = tipologie;
+                return View("Modifica", formData);
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: AdminController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+            using (VideogameContext db = new VideogameContext())
+            {
+                Videogioco? videogioco = db.Videogiochi.Where(p => p.Id == id).FirstOrDefault();
+                if (videogioco != null)
+                {
+                    videogioco.Nome = formData.Videogioco.Nome;
+                    videogioco.Descrizione = formData.Videogioco.Descrizione;
+                    videogioco.Foto = formData.Videogioco.Foto;
+                    videogioco.Prezzo = formData.Videogioco.Prezzo;
+                    videogioco.TipologiaId = formData.Videogioco.TipologiaId;
+                    db.SaveChanges();
+                }
+
+            }
+            return RedirectToAction("Index");
+    }
 
         // POST: AdminController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Elimina(int id)
         {
-            try
+            VideogameContext db = new VideogameContext();
+            Videogioco videogioco = (from v in db.Videogiochi where v.Id == id select v).FirstOrDefault();
+            if (videogioco is null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound("Mario, sembra che il tuo videogioco sia in un altro castello!");
             }
-            catch
+            else
             {
-                return View();
+                db.Remove(videogioco);
+                db.SaveChanges();
             }
+            return RedirectToAction("Index");
         }
     }
 }
