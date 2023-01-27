@@ -31,6 +31,8 @@ namespace VideogameShop.Models
         public int TipologiaId { get; set; }
         public Tipologia? Tipologia { get; set; }
 
+        public List<Acquisto>? Acquisti { get; set; }
+
         //Costruttori:
 
         public Videogioco() { }
