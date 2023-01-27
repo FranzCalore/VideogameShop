@@ -1,50 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using VideogameShop.Database;
 using VideogameShop.Models;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace VideogameShop.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class HomeController : ControllerBase
+    public class HomeController : Controller
     {
-        // GET: api/<HomeController>
-        [HttpGet]
-        public IActionResult Get(string? search)
+        // GET: HomeController
+        public ActionResult Index()
         {
-            using VideogameContext db = new();
-            List<Videogioco> ListaVideogiochi = new();
-            if(search is null || search == "")
-            {
-                ListaVideogiochi = db.Videogiochi.ToList();
-            }
-            else
-            {
-                search = search.ToLower();
-                ListaVideogiochi = db.Videogiochi.Include(V=>V.Tipologia)
-                                                 .Where(V => V.Nome.ToLower().Contains(search) ||                                         
-                                                        V.Tipologia.TipologiaNome.ToLower().Contains(search) ||
-                                                        V.Descrizione.ToLower().Contains(search))
-                                                 .ToList();
-            }
-            return Ok(ListaVideogiochi);
+            return View();
         }
 
-        // GET api/<HomeController>/5
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        // GET: HomeController/Details/5
+        public ActionResult Dettagli(int id)
         {
-            using VideogameContext db = new();
-            Videogioco videogioco = db.Videogiochi.Where(V => V.Id == id).Include(Videogioco => Videogioco.Tipologia).FirstOrDefault();
-            if (videogioco is null)
-            {
-                return NotFound("Mario, sembra che il tuo videogioco sia in un altro castello!");
-            }
-            return Ok(videogioco);
+            return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Compra(Acquisto dataForm)
+        {
+            using (VideogameContext db = new VideogameContext())
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View("Dettagli", dataForm);
+                }
+
+                dataForm.DataAcquisto = DateTime.Now;
+                db.Acquisti.Add(dataForm);
+                db.SaveChanges();
+
+            }
+
+            return View("Successo");
+        }
     }
 }
