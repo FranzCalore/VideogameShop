@@ -1,20 +1,32 @@
-﻿<h1>CREA</h1>
-<form class="row g-3">
+﻿@model VideogiocoTipologiaView
+
+<h1>Nuovo Videogioco</h1>
+<form asp-controller="Admin" asp-action="Crea" method="post" class="row g-3">
     <div class="col-12">
         <label for="inputNome" class="form-label">Nome</label><br><br>
-        <input type="text" class="form-control" id="inputNome" placeholder="">
+        <input asp-for="Videogioco.Nome" type="text" class="form-control" id="inputNome" placeholder="">
     </div><br><br>
     <div class="col-12">
         <label for="inputDescrizione" class="form-label">Descrizione</label><br><br>
-        <input type="text" class="form-control" id="inputDescrizione" placeholder="">
+        <input asp-for="Videogioco.Descrizione" type="text" class="form-control" id="inputDescrizione" placeholder="">
     </div>
     <div class="col-12">
         <label for="inputPrezzo" class="form-label">Prezzo</label><br><br>
-        <input type="text" class="form-control" id="inputPrezzo" placeholder="">
+        <input asp-for="Videogioco.Prezzo" type="text" class="form-control" id="inputPrezzo" placeholder="">
     </div><br><br>
     <div class="col-12">
         <label for="inputImmagine" class="form-label">Immagine</label><br><br>
-        <input type="text" class="form-control" id="inputImmagine" placeholder="">
+        <input asp-for="Videogioco.Foto" type="text" class="form-control" id="inputImmagine" placeholder="">
+    </div><br><br>
+    <div class="col-12">
+        <label>Categoria:</label>
+        <select asp-for="Videogioco.TipologiaId" rows="10" class="d-block w-100">
+            <option value=""></option>
+            @foreach (Tipologia tipologia in Model.Tipologie)
+            {
+                <option value="@tipologia.TipologiaId">@tipologia.TipologiaNome</option>
+            }
+        </select>
     </div><br><br>
     <div class="col-12">
         <button type="submit" class="btn btn-primary">Salva</button>

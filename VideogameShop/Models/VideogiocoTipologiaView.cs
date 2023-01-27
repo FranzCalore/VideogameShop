@@ -8,7 +8,7 @@ namespace VideogameShop.Models
 
         public List<Tipologia>? Tipologie { get; set; }
 
-        public Acquisto Acquisto { get; set; }
+        public Acquisto? Acquisto { get; set; }
 
     }
 }

@@ -26,12 +26,12 @@ else
                 {
                     <tr>
                         <td><a href="@Url.Action("Dettagli","Admin",new{id=videogioco.Id})">@videogioco.Nome</a></td>
-                        <td><img src="@videogioco.Foto" class="img-fluid" alt="@videogioco.Nome" width="300"></td>
+                        <td><img src="@videogioco.Foto" class="img-fluid" alt="@videogioco.Nome" style="max-width:100px"></td>
                         <td>@videogioco.Tipologia.TipologiaNome</td>
                         <td>@videogioco.Prezzo €</td>
                         <td><a class="btn btn-primary" href="@Url.Action("Modifica","Admin", new{id=videogioco.Id})">Modifica Videogioco</a></td>
                         <form>
-                        <td><button class="submit" href="@Url.Action("Elimina","Admin", new{id=videogioco.Id})">Elimina Videogioco</button></td>
+                        <td><button class="submit btn btn-danger" href="@Url.Action("Elimina","Admin", new{id=videogioco.Id})">Elimina Videogioco</button></td>
                         </form>
                     </tr>
                 }
