@@ -26,6 +26,15 @@ else
             <tbody>
                 @foreach (Videogioco videogioco in Model)
                 {
+                    string stringaQuantita = "";
+                    if (videogioco.QuantitaDisponibile <= 5)
+                    {
+                        stringaQuantita = "ATTENZIONE: SOLO " + videogioco.QuantitaDisponibile + " UNITÀ DISPONIBILI!";
+                    }
+                    else
+                    {
+                        stringaQuantita = videogioco.QuantitaDisponibile + " Unità rimanenti";
+                    }
                     <tr>
                         <td><a href="@Url.Action("Dettagli","Admin",new{id=videogioco.Id})">@videogioco.Nome</a></td>
                         <td><img src="@videogioco.Foto" class="img-fluid" alt="@videogioco.Nome" style="max-width:100px"></td>
@@ -33,8 +42,8 @@ else
                         <td>@videogioco.Prezzo €</td>
                         <td><a class="btn btn-primary" href="@Url.Action("Modifica","Admin", new{id=videogioco.Id})">Modifica Videogioco</a></td>
                         <td><a class="btn btn-danger" href="@Url.Action("Elimina","Admin", new{id=videogioco.Id})">Elimina Videogioco</a></td>
-                        <td>@videogioco.QuantitaDisponibile</td>
-                        <td><a class="btn btn-success" href="@Url.Action("Rifornisci","Admin", new{id=videogioco.Id})">Rifornisci</td>
+                        <td>@stringaQuantita</td>
+                        <td><a class="btn btn-success" href="@Url.Action("Rifornisci","Admin", new{id=videogioco.Id})">Rifornisci</a></td>
                     </tr>
                 }
             </tbody>

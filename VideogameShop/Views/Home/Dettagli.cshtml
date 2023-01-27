@@ -1,17 +1,18 @@
-﻿@model Acquisto
+﻿@model VideogiocoTipologiaView
 
-@{
-    string address = this.Context.Request.Path;
-    string addressmodificato=address.Substring(address.LastIndexOf("/") + 1);
-}
 
-PLACEHOLDER DETTAGLI SINGOLO VIDEOGIOCO
+<div class="container-fluid text-center text-light">
+    <h1 class="pt-4 pb-4">@Model.Videogioco.Nome</h1>
+    <img src="@Model.Videogioco.Foto" class="img-fluid" alt="...">
+    <h3 class="text-center pt-4">@Model.Videogioco.Prezzo €</h3>
+    <div><p>@Model.Videogioco.Descrizione</p></div>
+</div>
 
 <form asp-controller="Home" asp-action="Compra" method="post">
     @Html.AntiForgeryToken()
-    <input asp-for="VideogiocoId" type="hidden" value="@addressmodificato"/>
+    <input asp-for="Acquisto.VideogiocoId" type="hidden" value="@Model.Videogioco.Id"/>
     <label>Numero Copie:</label>
-    <select asp-for="Quantita" rows="10" class="d-block w-100">
+    <select asp-for="Acquisto.Quantita" rows="10" class="d-block w-100">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>

@@ -16,27 +16,41 @@ namespace VideogameShop.Controllers
         // GET: HomeController/Details/5
         public ActionResult Dettagli(int id)
         {
-            return View();
+            using VideogameContext db = new();
+            VideogiocoTipologiaView view = new();
+            view.Videogioco = db.Videogiochi.Where(v => v.Id == id).FirstOrDefault();
+            return View(view);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Compra(Acquisto dataForm)
+        public IActionResult Compra(VideogiocoTipologiaView dataForm)
         {
             using (VideogameContext db = new VideogameContext())
             {
+                Videogioco videogioco = db.Videogiochi.Where(v => v.Id == dataForm.Acquisto.VideogiocoId).FirstOrDefault();
+                dataForm.Videogioco = videogioco;
                 if (!ModelState.IsValid)
                 {
                     return View("Dettagli", dataForm);
                 }
+                
+                if (dataForm.Acquisto.Quantita <= dataForm.Videogioco.QuantitaDisponibile)
+                {
 
-                dataForm.DataAcquisto = DateTime.Now;
-                db.Acquisti.Add(dataForm);
-                db.SaveChanges();
+                    Acquisto acquisto = dataForm.Acquisto;
+                    videogioco.QuantitaDisponibile = videogioco.QuantitaDisponibile - acquisto.Quantita;
+                    acquisto.DataAcquisto = DateTime.Now;
+                    db.Acquisti.Add(acquisto);
+                    db.SaveChanges();
+                    return View("Successo");
+                }
+                return View("Dettagli", dataForm);
+                
 
             }
 
-            return View("Successo");
+            
         }
     }
 }
