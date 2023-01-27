@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using VideogameShop.Models;
 
 namespace VideogameShop.Database
 {
-    public class VideogameContext:DbContext
+    public class VideogameContext: IdentityDbContext<IdentityUser>
     {
         public DbSet<Videogioco> Videogiochi { get; set; }
         public DbSet<Tipologia> Tipologie { get; set; }
