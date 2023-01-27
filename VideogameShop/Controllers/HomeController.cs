@@ -1,32 +1,43 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using VideogameShop.Models;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace VideogameShop.Controllers
 {
-    public class HomeController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class HomeController : ControllerBase
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        // GET: api/<HomeController>
+        [HttpGet]
+        public IEnumerable<string> Get()
         {
-            _logger = logger;
+            return new string[] { "value1", "value2" };
         }
 
-        public IActionResult Index()
+        // GET api/<HomeController>/5
+        [HttpGet("{id}")]
+        public string Get(int id)
         {
-            return View();
+            return "value";
         }
 
-        public IActionResult Privacy()
+        // POST api/<HomeController>
+        [HttpPost]
+        public void Post([FromBody] string value)
         {
-            return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        // PUT api/<HomeController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        // DELETE api/<HomeController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
         }
     }
 }
