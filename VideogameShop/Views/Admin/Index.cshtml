@@ -30,7 +30,9 @@ else
                         <td>@videogioco.Tipologia.TipologiaNome</td>
                         <td>@videogioco.Prezzo €</td>
                         <td><a class="btn btn-primary" href="@Url.Action("Modifica","Admin", new{id=videogioco.Id})">Modifica Videogioco</a></td>
-                        <td><a class="btn btn-danger" href="@Url.Action("Elimina","Admin", new{id=videogioco.Id})">Elimina Videogioco</a></td>
+                        <form>
+                        <td><button class="submit" href="@Url.Action("Elimina","Admin", new{id=videogioco.Id})">Elimina Videogioco</button></td>
+                        </form>
                     </tr>
                 }
             </tbody>
