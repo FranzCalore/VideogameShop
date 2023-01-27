@@ -46,7 +46,7 @@ namespace VideogameShop.Controllers
             {
                 List<Tipologia> TipologieDb = db.Tipologie.ToList<Tipologia>();
 
-                VideogiocoCategoriaView ViewModello = new VideogiocoCategoriaView();
+                VideogiocoTipologiaView ViewModello = new VideogiocoTipologiaView();
                 ViewModello.Videogioco = new Videogioco();
 
                 ViewModello.Tipologie = TipologieDb;
@@ -58,7 +58,7 @@ namespace VideogameShop.Controllers
         // POST: AdminController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Crea(VideogiocoCategoriaView dataForm)
+        public ActionResult Crea(VideogiocoTipologiaView dataForm)
         {
             using (VideogameContext db = new VideogameContext())
             { 
@@ -87,7 +87,7 @@ namespace VideogameShop.Controllers
                 if (videogioco != null)
                 {
                     List<Tipologia> tipologie = db.Tipologie.ToList();
-                    VideogiocoCategoriaView modelloView = new()
+                    VideogiocoTipologiaView modelloView = new()
                     {
                         Videogioco = videogioco,
                         Tipologie = tipologie
@@ -104,7 +104,7 @@ namespace VideogameShop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Modifica(int id, VideogiocoCategoriaView formData)
+        public ActionResult Modifica(int id, VideogiocoTipologiaView formData)
         {
             if (!ModelState.IsValid)
             {

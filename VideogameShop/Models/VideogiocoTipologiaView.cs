@@ -2,7 +2,7 @@
 
 namespace VideogameShop.Models
 {
-    public class VideogiocoCategoriaView
+    public class VideogiocoTipologiaView
     {
         public Videogioco Videogioco { get; set; }
 
