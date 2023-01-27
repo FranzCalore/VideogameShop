@@ -1,16 +1,16 @@
 ﻿@model List<Videogioco>
 
+<main class="container backgroundOpaco p-4">
 @if (Model.Count == 0)
 {
     <h3>Non sono presenti Videogiochi nel Database</h3>
-    <a class="btn btn-primary" href="@Url.Action("Crea","Admin")">Aggiungi Videogioco</a>
+    <a class="btn btn-primary my-3" href="@Url.Action("Crea","Admin")">Aggiungi Videogioco</a>
 }
 else
 {
-    <main class="container">
-        <a class="btn btn-primary" href="@Url.Action("Crea","Admin")">Aggiungi Videogioco</a>
+        <a class="btn btn-primary my-3" href="@Url.Action("Crea","Admin")">Aggiungi Videogioco</a>
         <h1>Lista Videogiochi</h1>
-        <table class="table table-hover my-5">
+        <table class="table table-hover my-5 text-center">
             <thead>
                 <tr>
                     <th scope="col">Nome</th>
@@ -32,14 +32,13 @@ else
                         <td>@videogioco.Tipologia.TipologiaNome</td>
                         <td>@videogioco.Prezzo €</td>
                         <td><a class="btn btn-primary" href="@Url.Action("Modifica","Admin", new{id=videogioco.Id})">Modifica Videogioco</a></td>
-                        <form>
-                        <td><button class="submit btn btn-danger" href="@Url.Action("Elimina","Admin", new{id=videogioco.Id})">Elimina Videogioco</button></td>
-                        </form>
-                        <td>COPIE DISPONIBILI PLACEHOLDER</td>
+                        <td><a class="btn btn-danger" href="@Url.Action("Elimina","Admin", new{id=videogioco.Id})">Elimina Videogioco</a></td>
+                        <td>@videogioco.QuantitaDisponibile</td>
                         <td><a class="btn btn-success" href="@Url.Action("Rifornisci","Admin", new{id=videogioco.Id})">Rifornisci</td>
                     </tr>
                 }
             </tbody>
         </table>       
-    </main>
+
 }
+</main>

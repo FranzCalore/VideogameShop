@@ -16,3 +16,65 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#fantasy {
+    font-family: fantasy;
+    font-size: 45px;
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: 700;
+    line-height: 49.5px !important;
+}
+
+#sconti {
+    background-image: url(https://png.pngtree.com/background/20220725/original/pngtree-big-sale-sticker-pattern-seamless-vector-repeat-geometric-yellow-for-any-picture-image_1777322.jpg);
+    background-repeat: repeat;
+}
+
+#navbar {
+    background-image: url(/img/background-navbar.jpg) !important;
+    background-repeat: repeat !important;
+}
+
+.testo {
+    font-family: fantasy;
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+#bestseller {
+    background-image: url(https://www.piuvenduti.it/wp-content/uploads/2020/04/pi%C3%B9.venduti-e1586682766814.jpg);
+    background-repeat: repeat;
+}
+
+.titolo {
+    font-family: fantasy;
+    font-size: 30px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.testogrande {
+    font-family: fantasy;
+    font-size: 45px;
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: 700;
+    line-height: 49.5px
+}
+
+.imgbottone {
+    height: 100px;
+    width: 100px;
+}
+
+.backgroundOpaco {
+    background-color:rgba(255,255,255,0.75);
+    border-radius: 25px;
+
+}

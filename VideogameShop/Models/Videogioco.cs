@@ -23,15 +23,19 @@ namespace VideogameShop.Models
         [Url(ErrorMessage = "L'url inserito è invalido!")]
         public string Foto { get; set; }
 
-        [Column(TypeName = "float")]
         [Required(ErrorMessage = "Il prezzo del videogioco è obbligatorio")]
         [Range(0, 10000, ErrorMessage = "Il prezzo deve essere superiore a 0!")]
-        public float Prezzo { get; set; }
+        public double Prezzo { get; set; }
+
+        [Range(0,int.MaxValue)]
+        public int? QuantitaDisponibile { get; set; }
 
         public int TipologiaId { get; set; }
         public Tipologia? Tipologia { get; set; }
 
         public List<Acquisto>? Acquisti { get; set; }
+
+        public List<Rifornimento>? ListaRifornimenti { get; set; }
 
         //Costruttori:
 

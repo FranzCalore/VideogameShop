@@ -10,6 +10,8 @@ namespace VideogameShop.Database
 
         public DbSet<Acquisto> Acquisti { get; set; }
 
+        public DbSet<Rifornimento> Rifornimenti { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source = localhost; Initial Catalog = VideoGameDB; Integrated Security = True; Pooling = False;TrustServerCertificate=True");
