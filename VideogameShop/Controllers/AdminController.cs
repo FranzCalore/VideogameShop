@@ -14,7 +14,7 @@ namespace VideogameShop.Controllers
         {
             using (VideogameContext db = new VideogameContext())
             {
-                List<Videogioco> ListaVideogiochi = db.Videogiochi.ToList<Videogioco>();
+                List<Videogioco> ListaVideogiochi = db.Videogiochi.Include(v=>v.Tipologia).ToList<Videogioco>();
                 return View("Index", ListaVideogiochi);
             }
         }
