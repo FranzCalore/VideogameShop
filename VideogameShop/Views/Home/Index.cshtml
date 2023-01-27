@@ -145,18 +145,11 @@
         </div>
         <h1 class="mt-4 mb-4 text-light testogrande">Tutti i Giochi</h1>
         <div>
-            <div class="row">
-                <div class="col-6 col-md-3 col-xl-2 pb-3">
-                    <div class="card">
-                        <img src="https://livecards.it/pi/animal-crossing-new-horizons-happy-home-paradise-ns-dlc-64458.jpg"
-                             class="card-img-top" alt="cabin">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Nome Gioco</h5>
-                            <p>prezzo</p>
-
-                        </div>
-                    </div>
-                </div>
+            <div class="row container_giochi">
+                
+            </div>
+        </div>
+    </div>
 
 
 </main>
@@ -181,3 +174,40 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        caricaGiochi();
+
+        function caricaGiochi(search) {
+            axios.get("/api/HomeApi", {
+                params: { search: search }
+            }).then((res) => {
+                console.log("Risultato ok", res);
+
+                document.querySelector('.container_giochi').innerHTML = '';
+
+                res.data.forEach(videogioco => {
+                    console.log("videogioco", videogioco);
+                    document.querySelector(".container_giochi").innerHTML +=
+                        `
+                    <div class="col-6 col-md-3 col-xl-2 pb-3">
+                            <div class="card">
+                                <img src="${videogioco.foto}"
+                                     class="card-img-top" alt="cabin">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">${videogioco.nome}</h5>
+                                    <p>${videogioco.prezzo}</p>
+
+                                </div>
+                            </div>
+                        </div>
+                            `
+                });
+            }).catch ((error) => {
+            console.log(error);
+        });
+        }
+    </script>
+}
