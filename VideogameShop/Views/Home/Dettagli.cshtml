@@ -7,8 +7,6 @@
 
 PLACEHOLDER DETTAGLI SINGOLO VIDEOGIOCO
 
-<h1>@addressmodificato</h1>
-
 <form asp-controller="Home" asp-action="Compra" method="post">
     @Html.AntiForgeryToken()
     <input asp-for="VideogiocoId" type="hidden" value="@addressmodificato"/>

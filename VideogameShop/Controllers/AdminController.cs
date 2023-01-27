@@ -149,5 +149,29 @@ namespace VideogameShop.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Rifornisci(int id)
+        {
+            using (VideogameContext db = new VideogameContext())
+            {
+                Videogioco? videogioco = db.Videogiochi.Where(v => v.Id == id).FirstOrDefault();
+                if (videogioco != null)
+                {
+                    List<Tipologia> tipologie = db.Tipologie.ToList();
+                    VideogiocoTipologiaView modelloView = new()
+                    {
+                        Videogioco = videogioco,
+                        Tipologie = tipologie
+                    };
+                    return View("Rifornisci", modelloView);
+                }
+                else
+                {
+                    return NotFound("Mario, sembra che il tuo videogioco sia in un altro castello!");
+                }
+
+            }
+        }
     }
 }

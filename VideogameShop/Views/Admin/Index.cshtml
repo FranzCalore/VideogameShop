@@ -19,6 +19,8 @@ else
                     <th scope="col">Prezzo</th>
                     <th></th>
                     <th></th>
+                    <th>Copie Disponibili</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +35,8 @@ else
                         <form>
                         <td><button class="submit btn btn-danger" href="@Url.Action("Elimina","Admin", new{id=videogioco.Id})">Elimina Videogioco</button></td>
                         </form>
+                        <td>COPIE DISPONIBILI PLACEHOLDER</td>
+                        <td><a class="btn btn-success" href="@Url.Action("Rifornisci","Admin", new{id=videogioco.Id})">Rifornisci</td>
                     </tr>
                 }
             </tbody>
