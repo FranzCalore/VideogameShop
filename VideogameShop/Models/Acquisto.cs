@@ -14,6 +14,8 @@ namespace VideogameShop.Models
 
         public int Quantita { get; set; }
 
+        public Acquisto() { }
+
         public Acquisto(int acquistoId, DateTime dataAcquisto, int videogiocoId, int quantita)
         {
             AcquistoId = acquistoId;
