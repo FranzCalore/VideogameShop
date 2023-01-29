@@ -12,6 +12,8 @@ namespace VideogameShop.Models
         public DateTime DataAcquisto { get; set; }
         public int VideogiocoId { get; set; }
 
+        public Videogioco Videogioco { get; set; }
+
         public int Quantita { get; set; }
 
         public Acquisto() { }
