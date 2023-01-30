@@ -32,7 +32,9 @@ namespace VideogameShop.Controllers
 
                 if (VideogiocoTrovato != null)
                 {
-                    return View(VideogiocoTrovato);
+                    VideogiocoTipologiaView VideogiocoView = new();
+                    VideogiocoView.Videogioco = VideogiocoTrovato;
+                    return View(VideogiocoView);
                 }
 
                 return NotFound("Mario, sembra che il tuo videogioco sia in un altro castello!");
@@ -150,28 +152,31 @@ namespace VideogameShop.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public IActionResult Rifornisci(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Rifornisci(VideogiocoTipologiaView dataForm)
         {
             using (VideogameContext db = new VideogameContext())
             {
-                Videogioco? videogioco = db.Videogiochi.Where(v => v.Id == id).FirstOrDefault();
-                if (videogioco != null)
+                Videogioco videogioco = db.Videogiochi.Where(v => v.Id == dataForm.Videogioco.Id).Include(v=>v.Tipologia).FirstOrDefault();
+                dataForm.Videogioco = videogioco;
+                if (!ModelState.IsValid)
                 {
-                    List<Tipologia> tipologie = db.Tipologie.ToList();
-                    VideogiocoTipologiaView modelloView = new()
-                    {
-                        Videogioco = videogioco,
-                        Tipologie = tipologie
-                    };
-                    return View("Rifornisci", modelloView);
-                }
-                else
-                {
-                    return NotFound("Mario, sembra che il tuo videogioco sia in un altro castello!");
+                    return View("Dettagli", dataForm);
                 }
 
+                    Rifornimento rifornimento = dataForm.Rifornimento;
+                    videogioco.QuantitaDisponibile = videogioco.QuantitaDisponibile + rifornimento.Quantita;
+                    rifornimento.Data = DateTime.Now;
+                    rifornimento.VideogiocoId=videogioco.Id;
+                    db.Rifornimenti.Add(rifornimento);
+                    db.SaveChanges();
+                    return View("Successo");
+
+
             }
+
+
         }
     }
 }

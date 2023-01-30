@@ -1,0 +1,56 @@
+﻿@model VideogiocoTipologiaView
+
+<div class="container-fluid text-center text-light">
+    <div class="row align-items-center justify-content-center">
+        <div class="col-lg-4">
+            <h1 class="pt-4 pb-4">@Model.Videogioco.Nome</h1>
+            <img src="@Model.Videogioco.Foto" class="img-fluid" alt="..." width="40%">
+        </div>
+        <div class="col-lg-6">
+            <div><p>@Model.Videogioco.Descrizione</p></div>
+            <h3 class="text-center pt-4" id="prezzo_gioco">@Model.Videogioco.Prezzo €</h3>
+            <p>@Model.Videogioco.Tipologia.TipologiaNome</p>
+            <p>Copie disponibili:</p>
+            <p>@Model.Videogioco.QuantitaDisponibile</p>
+            <h3>Vuoi fare rifornimento?</h3>
+            <form asp-controller="Admin" asp-action="Rifornisci" method="post">
+                @Html.AntiForgeryToken()
+                <input asp-for="Videogioco.Id" type="hidden" value="@Model.Videogioco.Id" />
+                <input asp-for="Videogioco.Nome" type="hidden" class="form-control" id="inputNome">
+                <input asp-for="Videogioco.Descrizione" type="hidden" class="form-control" id="inputDescrizione">
+                <input asp-for="Videogioco.Prezzo" type="hidden" class="form-control" id="inputPrezzo">
+                <input asp-for="Videogioco.Foto" type="hidden" class="form-control" id="inputImmagine">
+                <label>Numero copie da ordinare:</label>
+                <input asp-for="Rifornimento.Quantita" id="campo_quantita" type="number" min="1" max="100" />
+                <label>Fornitore:</label>
+                <input asp-for="Rifornimento.NomeFornitore" type="text" />
+                <input asp-for="Rifornimento.Prezzo" id="campo_prezzo" type="text" /> €
+                <button type="submit" class="btn btn-primary">Rifornisci</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+
+        document.getElementById('campo_quantita').addEventListener('keyup', Calcoloprezzo);
+
+        function Calcoloprezzo(){
+            let prezzo = document.getElementById('prezzo_gioco').innerHTML;
+            let prezzocifra = parseInt(prezzo);
+            let quantita = document.getElementById('campo_quantita').value;
+            let prezzoRifornimento = (prezzocifra/2)*quantita;
+            document.getElementById('campo_prezzo').value=prezzoRifornimento
+
+        }
+
+
+
+
+
+
+
+        </script>
+        }
