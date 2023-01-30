@@ -1,4 +1,5 @@
-﻿<main class="mb-5">
+﻿@using VideogameShop.Database;
+<main class="mb-5">
     <div class="container-fluid text-center bg-warning pb-5 pt-5 me-0 ms-0" id="sconti">
         <h1 id="fantasy" class="mb-4 text-danger">Offerte Speciali Fino A Domenica</h1>
         <div id="carouselExampleCaptions" class="carousel slide">
@@ -145,21 +146,12 @@
         <h1 class="mt-4 mb-4 text-light testogrande">Tutti i Giochi</h1>
         <div>
             <div class="row container_giochi">
-                
             </div>
         </div>
     </div>
 
 
 </main>
-<footer class="container-fluid mt-5 mb-5">
-    <div class="row">
-        <div class="col justify-content-start ms-3">Negozio Videogiochi</div>
-        <div class="col justify-content-end text-end me-3">Copyright</div>
-    </div>
-</footer>
-
-
 
 
 
@@ -175,6 +167,10 @@
 
         caricaGiochi();
 
+        function Like(id){
+            axios.post("/api/HomeApi")
+        }
+
         function caricaGiochi(search) {
             axios.get("/api/HomeApi", {
                 params: { search: search }
@@ -186,31 +182,60 @@
                 res.data.forEach(videogioco => {
                     console.log("videogioco", videogioco);
                     let prezzo = videogioco.prezzo.toFixed(2);
-                    prezzo = prezzo.replace(".",",");
+                    prezzo = prezzo.replace(".", ",");
                     document.querySelector(".container_giochi").innerHTML +=
                         `
-                            
-                    <div class="col-6 col-md-3 col-xl-2 pb-3">
-                            <div class="card">
-                                    <a href="/Home/Dettagli/${videogioco.id}">
-                                <img src="${videogioco.foto}"
-                                     class="card-img-top" alt="cabin">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">${videogioco.nome}</h5>
-                                    <p>${prezzo} €</p>
-                                    
-                                </div>
-                                    </a>
-                            </div>
-                        </div>
-                        
-                            `
-                });
-            }).catch ((error) => {
-            console.log(error);
-        });
-        }
 
+                            <div class="col-6 col-md-3 col-xl-2 pb-3">
+                                    <div class="card">
+                                            <a href="/Home/Dettagli/${videogioco.id}">
+                                        <img src="${videogioco.foto}"
+                                             class="card-img-top" alt="cabin">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">${videogioco.nome}</h5>
+                                                    <p>${prezzo} €</p></a>
+                                            <button class="button button-like botono${videogioco.id}">
+          <p>❤</p>
+          <span class="spano${videogioco.id}">${videogioco.numeroLike} Like</span>
+        </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                    `
+                    
+                });
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+            
+            axios.get("/api/HomeApi", {
+            }).then((res) => {
+                res.data.forEach(videogioco=> {
+                    document.querySelector(`.botono${videogioco.id}`).addEventListener("click", function() {
+                        document.querySelector(`.botono${videogioco.id}`).classList.toggle("liked");
+                    if (!document.querySelector(`.botono${videogioco.id}`).classList.contains("liked")){
+                        videogioco.numeroLike--;
+                    }
+                    else{
+                        videogioco.numeroLike++;
+                    }
+                    document.querySelector(`.spano${videogioco.id}`).innerHTML=videogioco.numeroLike + " Like";
+                    axios.put(`/api/HomeApi/${videogioco.id}`, videogioco, {
+                    })
+                    .then(response=>{console.log(response);
+                    })
+                    .catch(error=>{console.log(error);
+                    });
+                    });
+
+                })
+                    }).catch((error) => {
+                    console.log(error);
+                    });
+          
 
     </script>
 }
