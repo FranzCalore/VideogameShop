@@ -10,5 +10,7 @@ namespace VideogameShop.Models
 
         public Acquisto? Acquisto { get; set; }
 
+        public Rifornimento? Rifornimento { get; set; }
+
     }
 }

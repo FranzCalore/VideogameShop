@@ -2,27 +2,34 @@
 
 
 <div class="container-fluid text-center text-light">
+    <div class="row align-items-center justify-content-center">
+        <div class="col-5">
     <h1 class="pt-4 pb-4">@Model.Videogioco.Nome</h1>
-    <img src="@Model.Videogioco.Foto" class="img-fluid" alt="...">
-    <h3 class="text-center pt-4">@Model.Videogioco.Prezzo €</h3>
+    <img src="@Model.Videogioco.Foto" class="img-fluid" alt="..." width="80%">
+        </div>
+        <div class="col-5">
     <div><p>@Model.Videogioco.Descrizione</p></div>
-</div>
+            <h3 class="text-center pt-4">@Model.Videogioco.Prezzo €</h3>
+            <form asp-controller="Home" asp-action="Compra" method="post">
+                @Html.AntiForgeryToken()
+                <input asp-for="Acquisto.VideogiocoId" type="hidden" value="@Model.Videogioco.Id" />
+                <label>Numero Copie:</label>
+                <select asp-for="Acquisto.Quantita" rows="10" class="w-50">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Acquista</button>
+            </form>
+        </div>
+    </div>   
 
-<form asp-controller="Home" asp-action="Compra" method="post">
-    @Html.AntiForgeryToken()
-    <input asp-for="Acquisto.VideogiocoId" type="hidden" value="@Model.Videogioco.Id"/>
-    <label>Numero Copie:</label>
-    <select asp-for="Acquisto.Quantita" rows="10" class="d-block w-100">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-    </select>
-    <button type="submit" class="btn btn-primary">Acquista</button>
-</form>
+
+</div>
