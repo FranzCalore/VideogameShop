@@ -36,6 +36,8 @@ namespace VideogameShop.Models
 
         public List<Rifornimento>? ListaRifornimenti { get; set; }
 
+        public int? NumeroLike { get; set; }
+
         //Costruttori:
 
         public Videogioco() { }
