@@ -20,8 +20,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
 namespace VideogameShop.Areas.Identity.Pages.Account
-{
-    [Authorize]
+{   
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
