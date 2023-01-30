@@ -15,6 +15,7 @@ namespace VideogameShop.Controllers
             using (VideogameContext db = new VideogameContext())
             {
                 List<Videogioco> ListaVideogiochi = db.Videogiochi.Include(v=>v.Tipologia).ToList<Videogioco>();
+                ListaVideogiochi=ListaVideogiochi.OrderBy(V => V.QuantitaDisponibile).ToList();              
                 return View("Index", ListaVideogiochi);
             }
         }
@@ -171,7 +172,7 @@ namespace VideogameShop.Controllers
                     rifornimento.VideogiocoId=videogioco.Id;
                     db.Rifornimenti.Add(rifornimento);
                     db.SaveChanges();
-                    return View("Successo");
+                    return RedirectToAction("Index");
 
 
             }

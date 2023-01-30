@@ -16,7 +16,6 @@ namespace VideogameShop.Models
 
         [Column(TypeName = "text")]
         [Required(ErrorMessage = "La descrizione del videogioco è obbligatoria!")]
-        [StringLength(500, ErrorMessage = "La descrizione del videogioco è troppo lunga! (>500 caratteri)")]
         public string Descrizione { get; set; }
 
         [Column(TypeName = "varchar(300)")]
