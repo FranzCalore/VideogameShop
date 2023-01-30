@@ -30,6 +30,10 @@ body {
     background-image: url(/img/sconti.jpg);
     background-repeat: repeat;
 }
+#scontiplay {
+    background-image: url(/img/sconti-play.jpg);
+    background-repeat: repeat;
+}
 
 #navbar {
     background-image: url(/img/background-navbar.jpg) !important;
@@ -47,6 +51,10 @@ body {
 
 #bestseller {
     background-image: url(/img/più.venduti-e1586682766814.jpg);
+    background-repeat: repeat;
+}
+#bestsellerplay {
+    background-image: url(/img/più-venduti-play.jpg);
     background-repeat: repeat;
 }
 
@@ -86,4 +94,8 @@ body {
 
 a:link {
     text-decoration: none;
+}
+
+#bg-play {
+    background-color:rgb(230,230,230) !important;
 }
