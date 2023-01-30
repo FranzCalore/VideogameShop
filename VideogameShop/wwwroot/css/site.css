@@ -78,3 +78,7 @@ body {
     border-radius: 25px;
 
 }
+
+a:link {
+    text-decoration: none;
+}

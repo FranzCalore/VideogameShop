@@ -185,19 +185,25 @@
 
                 res.data.forEach(videogioco => {
                     console.log("videogioco", videogioco);
+                    let prezzo = videogioco.prezzo.toFixed(2);
+                    prezzo = prezzo.replace(".",",");
                     document.querySelector(".container_giochi").innerHTML +=
                         `
+                            
                     <div class="col-6 col-md-3 col-xl-2 pb-3">
                             <div class="card">
+                                    <a href="/Home/Dettagli/${videogioco.id}">
                                 <img src="${videogioco.foto}"
                                      class="card-img-top" alt="cabin">
                                 <div class="card-body">
                                     <h5 class="card-title text-center">${videogioco.nome}</h5>
-                                    <p>${videogioco.prezzo}</p>
-
+                                    <p>${prezzo} €</p>
+                                    
                                 </div>
+                                    </a>
                             </div>
                         </div>
+                        
                             `
                 });
             }).catch ((error) => {
