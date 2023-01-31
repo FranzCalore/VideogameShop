@@ -12,7 +12,9 @@
 
         public int Quantita { get; set; }
 
-        public string NomeFornitore { get; set; }
+        public int? FornitoreId { get; set; }
+        public Fornitore? Fornitore { get; set; }
+        //public string NomeFornitore { get; set; }
 
         public double Prezzo { get; set; }
     }
