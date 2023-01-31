@@ -8,7 +8,7 @@ using VideogameShop.Models;
 
 namespace VideogameShop.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         // GET: AdminController
