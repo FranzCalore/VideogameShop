@@ -27,11 +27,19 @@ body {
 }
 
 #sconti {
-    background-image: url(/img/sconti.jpg);
+    background-image: url(/img/sconti.jpg) !important;
     background-repeat: repeat;
 }
 #scontiplay {
-    background-image: url(/img/sconti-play.jpg);
+    background-image: url(/img/sconti-play.jpg) !important;
+    background-repeat: repeat;
+}
+#scontinin {
+    background-image: url(/img/sconti-nin.jpg) !important;
+    background-repeat: repeat;
+}
+#scontixbox {
+    background-image: url(/img/sconti-xbox.jpg) !important;
     background-repeat: repeat;
 }
 
@@ -50,11 +58,19 @@ body {
 }
 
 #bestseller {
-    background-image: url(/img/più.venduti-e1586682766814.jpg);
+    background-image: url(/img/piu.venduti-e1586682766814.jpg) !important;
     background-repeat: repeat;
 }
 #bestsellerplay {
-    background-image: url(/img/più-venduti-playstation.jpg);
+    background-image: url(/img/piu-venduti-playstation.jpg) !important;
+    background-repeat: repeat;
+}
+#bestsellernin {
+    background-image: url(/img/piu.venduti-nin.jpg.png) !important;
+    background-repeat: repeat;
+}
+#bestsellerxbox {
+    background-image: url(/img/piu.venduti-xbox.jpg) !important;
     background-repeat: repeat;
 }
 
@@ -98,4 +114,10 @@ a:link {
 
 #bg-play {
     background-color:rgb(230,230,230) !important;
+}
+#bg-nin {
+    background-color: rgb(230,230,230) !important;
+}
+#bg-xbox {
+    background-color: rgb(26,26,28) !important;
 }
