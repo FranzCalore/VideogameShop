@@ -23,7 +23,7 @@
                 <label>Numero copie da ordinare:</label>
                 <input asp-for="Rifornimento.Quantita" id="campo_quantita" type="number" min="1" max="100" />
                 <label>Fornitore:</label>
-                <input asp-for="Rifornimento.NomeFornitore" type="text" />
+                <input asp-for="Rifornimento.Fornitore.FornitoreNome" type="text" />
                 <input asp-for="Rifornimento.Prezzo" id="campo_prezzo" type="text" /> €
                 <button type="submit" class="btn btn-primary">Rifornisci</button>
             </form>
