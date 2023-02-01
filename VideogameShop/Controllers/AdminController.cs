@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.SqlServer.Server;
 using VideogameShop.Database;
 using VideogameShop.Models;
+using VideogameShop.Utils;
 
 namespace VideogameShop.Controllers
 {
@@ -55,6 +56,8 @@ namespace VideogameShop.Controllers
 
                 VideogiocoTipologiaView ViewModello = new VideogiocoTipologiaView();
                 ViewModello.Videogioco = new Videogioco();
+
+                ViewModello.ListaConsole = SelectItemManager.ConverterListConsole();
 
                 ViewModello.Tipologie = TipologieDb;
 
