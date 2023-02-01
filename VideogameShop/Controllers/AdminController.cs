@@ -31,6 +31,7 @@ namespace VideogameShop.Controllers
                 Videogioco VideogiocoTrovato = db.Videogiochi
                     .Where(DbVideogioco => DbVideogioco.Id == id)
                     .Include(videogioco => videogioco.Tipologia)
+                    .Include(videogioco => videogioco.ListaConsole)
                     .FirstOrDefault();
 
                 if (VideogiocoTrovato != null)
@@ -50,6 +51,7 @@ namespace VideogameShop.Controllers
             using (VideogameContext db = new VideogameContext())
             {
                 List<Tipologia> TipologieDb = db.Tipologie.ToList<Tipologia>();
+                List<Models.Console> ConsoleDb = db.Consoles.ToList();
 
                 VideogiocoTipologiaView ViewModello = new VideogiocoTipologiaView();
                 ViewModello.Videogioco = new Videogioco();
