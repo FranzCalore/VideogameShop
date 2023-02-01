@@ -27,7 +27,7 @@ body {
 }
 
 #sconti {
-    background-image: url(/img/sconti.jpg) !important;
+    background-image: url(/img/sconti-ridotto.png) !important;
     background-repeat: repeat;
 }
 #scontiplay {
@@ -58,7 +58,7 @@ body {
 }
 
 #bestseller {
-    background-image: url(/img/piu.venduti-e1586682766814.jpg) !important;
+    background-image: url(/img/migliori-ridotto.png) !important;
     background-repeat: repeat;
 }
 #bestsellerplay {
@@ -121,3 +121,4 @@ a:link {
 #bg-xbox {
     background-color: rgb(26,26,28) !important;
 }
+
