@@ -79,6 +79,10 @@ body {
 
 }
 
+.backgroundOpacoDritto {
+    background-color: rgba(255,255,255,0.75);
+}
+
 a:link {
     text-decoration: none;
 }

@@ -9,7 +9,7 @@ namespace VideogameShop.Controllers
     {
         // GET: HomeController
         public ActionResult Index()
-        {
+        {          
             return View();
         }
 

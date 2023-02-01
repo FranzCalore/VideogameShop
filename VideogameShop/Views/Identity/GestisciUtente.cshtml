@@ -1,5 +1,10 @@
-﻿@model UtenteRuoloView
+﻿@{
+    Layout = "_LayoutAdmin";
+}
 
+@model UtenteRuoloView
+
+<div class="backgroundOpacoDritto">
 <form asp-controller="Identity" asp-action="GestisciUtente" method="post">
 
     <input type="hidden" asp-for="Utente.Id" />
@@ -16,3 +21,4 @@
 
     <button type="submit">Invia Modifiche</button>
 </form>
+</div>

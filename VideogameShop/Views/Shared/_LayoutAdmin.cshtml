@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Negozio Videogiochi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link runat="server" rel="shortcut icon" href="/img/mushroom_icon.png" type="image/x-icon" />
+    <link runat="server" rel="icon" href="/img/mushroom_icon.png" type="image/ico" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/VideogameShop.styles.css" asp-append-version="true" />
+</head>
+<body class="backgroundOpacoDritto">
+    <header class=" sticky-top">
+        <nav class="navbar navbar-light" id="navbar">
+            <div class="container-fluid">
+                <button class="btn btn-light" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                    Imperivm Games
+                </button>
+
+                <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+                     aria-labelledby="offcanvasWithBothOptionsLabel"
+                     style="background-image: url(/img/background-navbar.jpg); background-repeat: repeat;">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title text-light titolo" id="offcanvasWithBothOptionsLabel">Imperivm Games</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+
+                        <ul class="nav nav-pills flex-column mb-auto">
+                            <li class="nav-item">
+                                <a asp-controller="Home" asp-action="Index" class="nav-link link-dark text-light testo">
+                                    <svg class="bi pe-none me-2" width="16" height="16">
+                                        <use xlink:href="#home"></use>
+                                    </svg>
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link link-dark text-light testo">
+                                    <svg class="bi pe-none me-2" width="16" height="16">
+                                        <use xlink:href="#speedometer2"></use>
+                                    </svg>
+                                    Offerte Specali
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link link-dark text-light testo">
+                                    <svg class="bi pe-none me-2" width="16" height="16">
+                                        <use xlink:href="#table"></use>
+                                    </svg>
+                                    Giochi Migliori
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link link-dark text-light testo">
+                                    <svg class="bi pe-none me-2" width="16" height="16">
+                                        <use xlink:href="#grid"></use>
+                                    </svg>
+                                    Giochi Playstation
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link link-dark text-light testo">
+                                    <svg class="bi pe-none me-2" width="16" height="16">
+                                        <use xlink:href="#people-circle"></use>
+                                    </svg>
+                                    Giochi PC
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link link-dark text-light testo">
+                                    <svg class="bi pe-none me-2" width="16" height="16">
+                                        <use xlink:href="#people-circle"></use>
+                                    </svg>
+                                    Giochi XBOX
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link link-dark text-light testo">
+                                    <svg class="bi pe-none me-2" width="16" height="16">
+                                        <use xlink:href="#people-circle"></use>
+                                    </svg>
+                                    Giochi Nintendo
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index","Admin")" class="nav-link link-dark text-light testo">
+                                    <svg class="bi pe-none me-2" width="16" height="16">
+                                        <use xlink:href="#people-circle"></use>
+                                    </svg>
+                                    Area Amministrazione
+                                </a>
+                            </li>
+                        </ul>
+                        <hr>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-4 pb-2"> <button type="button" class="btn btn-primary btn-sm">Tipologia-1</button></div>
+                                <div class="col-4 pb-2"> <button type="button" class="btn btn-primary btn-sm">Tipologia-2</button></div>
+                                <div class="col-4 pb-2"> <button type="button" class="btn btn-primary btn-sm">Tipologia-3</button></div>
+                                <div class="col-4 pb-2"> <button type="button" class="btn btn-primary btn-sm">Tipologia-4</button></div>
+                                <div class="col-4 pb-2"> <button type="button" class="btn btn-primary btn-sm">Tipologia-5</button></div>
+                                <div class="col-4 pb-2"> <button type="button" class="btn btn-primary btn-sm">Tipologia-6</button></div>
+                                <div class="col-4 pb-2"> <button type="button" class="btn btn-primary btn-sm">Tipologia-7</button></div>
+                                <div class="col-4 pb-2"> <button type="button" class="btn btn-primary btn-sm">Tipologia-8</button></div>
+                                <div class="col-4 pb-2"> <button type="button" class="btn btn-primary btn-sm">Tipologia-9</button></div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+    <footer class="border-top footer text-light">
+        <div class="container">
+            &copy; 2023 - VideogameShop
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

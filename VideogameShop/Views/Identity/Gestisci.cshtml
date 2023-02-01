@@ -1,5 +1,11 @@
-﻿@model List<UtenteRuoloView>
+﻿@{
+    Layout = "_LayoutAdmin";
+}
 
+@model List<UtenteRuoloView>
+
+
+<div class="backgroundOpacoDritto">
 @foreach (UtenteRuoloView Utenti in Model){
     <a href="@Url.Action("GestisciUtente","Identity",new{id = Utenti.Utente.Id})">
     @if (Utenti.RuoloUtente is not null){
@@ -11,3 +17,4 @@
     }
     </a>
 }
+</div>
