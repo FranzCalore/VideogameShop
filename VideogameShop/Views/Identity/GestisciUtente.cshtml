@@ -1,0 +1,18 @@
+﻿@model UtenteRuoloView
+
+<form asp-controller="Identity" asp-action="GestisciUtente" method="post">
+
+    <input type="hidden" asp-for="Utente.Id" />
+
+    <input asp-for="Utente.UserName" />
+
+    <select asp-for="RuoloUtente.Id">
+        <option value=""></option>
+        @foreach(var Ruolo in Model.Ruoli)
+        {
+            <option value="@Ruolo.Id">@Ruolo.Name</option>
+        }
+    </select>
+
+    <button type="submit">Invia Modifiche</button>
+</form>

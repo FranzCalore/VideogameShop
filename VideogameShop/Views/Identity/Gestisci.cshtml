@@ -1,0 +1,13 @@
+﻿@model List<UtenteRuoloView>
+
+@foreach (UtenteRuoloView Utenti in Model){
+    <a href="@Url.Action("GestisciUtente","Identity",new{id = Utenti.Utente.Id})">
+    @if (Utenti.RuoloUtente is not null){
+        <p>@Utenti.Utente.UserName   -  @Utenti.RuoloUtente.Name</p>
+    }
+    else
+    {
+         <p>@Utenti.Utente.UserName   - Ruolo non assegnato </p>
+    }
+    </a>
+}
