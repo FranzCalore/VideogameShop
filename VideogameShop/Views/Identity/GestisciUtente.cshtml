@@ -4,21 +4,21 @@
 
 @model UtenteRuoloView
 
-<div class="backgroundOpacoDritto">
+<div class="backgroundOpacoDritto text-center p-4">
 <form asp-controller="Identity" asp-action="GestisciUtente" method="post">
 
     <input type="hidden" asp-for="Utente.Id" />
 
     <input asp-for="Utente.UserName" />
 
-    <select asp-for="RuoloUtente.Id">
+    <select class="my-2" asp-for="RuoloUtente.Id">
         <option value=""></option>
         @foreach(var Ruolo in Model.Ruoli)
         {
-            <option value="@Ruolo.Id">@Ruolo.Name</option>
+            <option class="my-2" value="@Ruolo.Id">@Ruolo.Name</option>
         }
-    </select>
+    </select><br />
 
-    <button type="submit">Invia Modifiche</button>
+    <button type="submit" class="btn btn-success">Invia Modifiche</button>
 </form>
 </div>

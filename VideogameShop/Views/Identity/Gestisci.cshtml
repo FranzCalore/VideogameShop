@@ -5,7 +5,7 @@
 @model List<UtenteRuoloView>
 
 
-<div class="backgroundOpacoDritto">
+<div class="backgroundOpacoDritto p-4">
 @foreach (UtenteRuoloView Utenti in Model){
     <a href="@Url.Action("GestisciUtente","Identity",new{id = Utenti.Utente.Id})">
     @if (Utenti.RuoloUtente is not null){
