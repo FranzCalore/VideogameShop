@@ -81,6 +81,7 @@ body {
 
 a:link {
     text-decoration: none;
+    color:white;
 }
 
 .button-like {
@@ -97,59 +98,98 @@ a:link {
     transition: all ease 0.4s;
 }
 
-    .button-like span {
-        margin-left: 0.5rem;
-    }
+.button-like span {
+    margin-left: 0.5rem;
+}
 
-    .button-like .fa,
-    .button-like span {
-        transition: all ease 0.4s;
-    }
+.button-like .fa,
+.button-like span {
+    transition: all ease 0.4s;
+}
 
-    .button-like:focus {
-        background-color: transparent;
-    }
+.button-like:focus {
+    background-color: transparent;
+}
 
-        .button-like:focus .fa,
-        .button-like:focus span {
-            color: #8a8a8a;
-        }
+.button-like:focus .fa,
+.button-like:focus span {
+    color: #8a8a8a;
+}
 
-    .button-like:hover {
-        border-color: #cc4b37;
-        background-color: transparent;
-    }
+.button-like:hover {
+    border-color: #cc4b37;
+    background-color: transparent;
+}
 
-        .button-like:hover .fa,
-        .button-like:hover span {
-            color: #cc4b37;
-        }
+.button-like:hover .fa,
+.button-like:hover span {
+    color: #cc4b37;
+}
 
 .liked {
     background-color: #cc4b37;
     border-color: #cc4b37;
 }
 
-    .liked .fa,
-    .liked span {
-        color: #fefefe;
-    }
+.liked .fa,
+.liked span {
+    color: #fefefe;
+}
 
-    .liked:focus {
-        background-color: #cc4b37;
-    }
+.liked:focus {
+    background-color: #cc4b37;
+}
 
-        .liked:focus .fa,
-        .liked:focus span {
-            color: #fefefe;
-        }
+.liked:focus .fa,
+.liked:focus span {
+    color: #fefefe;
+}
 
-    .liked:hover {
-        background-color: #cc4b37;
-        border-color: #cc4b37;
-    }
+.liked:hover {
+background-color: #cc4b37;
+border-color: #cc4b37;
+}
 
-        .liked:hover .fa,
-        .liked:hover span {
-            color: #fefefe;
-        }
+.liked:hover .fa,
+.liked:hover span {
+    color: #fefefe;
+}
+
+.user_card {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 1);
+    height: 375px;
+    width: 300px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#user_cards {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 920px;
+    width: calc(100% - 20px);
+}
+
+.card_img {
+    max-height: 250px;
+    margin-top: 10px;
+}
+
+.card_link {
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+.user_card_body {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card_title {
+    color: white;
+}

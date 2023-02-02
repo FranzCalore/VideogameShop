@@ -145,7 +145,7 @@
         </div>
         <h1 class="mt-4 mb-4 text-light testogrande">Tutti i Giochi</h1>
         <div>
-            <div class="row container_giochi">
+            <div id="user_cards" class="row container_giochi">
             </div>
         </div>
     </div>
@@ -186,22 +186,21 @@
                     document.querySelector(".container_giochi").innerHTML +=
                         `
 
-                            <div class="col-6 col-md-3 col-xl-2 pb-3">
-                                    <div class="card">
-                                            <a href="/Home/Dettagli/${videogioco.id}">
-                                        <img src="${videogioco.foto}"
-                                             class="card-img-top" alt="cabin">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-center">${videogioco.nome}</h5>
-                                                    <p>${prezzo} €</p></a>
-                                            <button class="button button-like botono${videogioco.id}">
-          <p>❤</p>
-          <span class="spano${videogioco.id}">${videogioco.numeroLike} Like</span>
-        </button>
-                                        </div>
 
+                                    <div class="user_card">
+                                            <a class="card_link" href="/Home/Dettagli/${videogioco.id}">
+                                                <img class="card_img" src="${videogioco.foto}" alt="${videogioco.nome}">
+                                                <div class="user_card_body">
+                                                <h4 class="card_title">${videogioco.nome}</h5>
+                                                <p>${prezzo} €</p>
+                                            </a>
+                                            
+                                            <button class="button button-like botono${videogioco.id}">
+                                            ❤
+                                            <span class="spano${videogioco.id}">${videogioco.numeroLike} Like</span>
+                                            </button>
+                                            </div>
                                     </div>
-                                </div>
 
                                     `
                     
