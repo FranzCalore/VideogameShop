@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.SqlServer.Server;
 using VideogameShop.Database;
@@ -103,7 +104,7 @@ namespace VideogameShop.Controllers
         {
             using (VideogameContext db = new VideogameContext())
             {
-                Videogioco? videogioco = db.Videogiochi.Where(v => v.Id == id).FirstOrDefault();
+                Videogioco? videogioco = db.Videogiochi.Where(v => v.Id == id).Include(vi=> vi.ListaConsole).FirstOrDefault();
                 if (videogioco != null)
                 {
                     List<Tipologia> tipologie = db.Tipologie.ToList();
@@ -112,6 +113,21 @@ namespace VideogameShop.Controllers
                         Videogioco = videogioco,
                         Tipologie = tipologie
                     };
+                    List<Models.Console> ConsoleDb = db.Consoles.ToList();
+                    List<SelectListItem> ListItems = new();
+                    foreach(Models.Console Console in ConsoleDb)
+                    {
+                        bool Selected = videogioco.ListaConsole.Any(con => con.Id == Console.Id);
+                        SelectListItem Option = new()
+                        {
+                            Text = Console.Name,
+                            Value = Console.Id.ToString(),
+                            Selected = Selected
+
+                        };
+                        ListItems.Add(Option);
+                    }
+                    modelloView.ListaConsole = ListItems;
                     return View("Modifica", modelloView);
                 }
                 else
