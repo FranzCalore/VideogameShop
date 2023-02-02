@@ -77,10 +77,20 @@ namespace VideogameShop.Controllers
                     List<Tipologia> tipologie = db.Tipologie.ToList<Tipologia>();
 
                     dataForm.Tipologie = tipologie;
+                    dataForm.ListaConsole = SelectItemManager.ConverterListConsole();
 
                 return View("Crea", dataForm);
             }
-
+                if(dataForm.ListaIdConsole is not null)
+                {
+                    dataForm.Videogioco.ListaConsole = new();
+                    foreach(string StringaIdConsole in dataForm.ListaIdConsole)
+                    {
+                        int IdConsole = int.Parse(StringaIdConsole);
+                        Models.Console? Console = db.Consoles.Where(C => C.Id == IdConsole).FirstOrDefault();
+                        dataForm.Videogioco.ListaConsole.Add(Console);
+                    }
+                }
                 db.Videogiochi.Add(dataForm.Videogioco);
                 db.SaveChanges();
             }
