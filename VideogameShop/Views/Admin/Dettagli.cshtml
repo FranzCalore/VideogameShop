@@ -12,6 +12,16 @@
             <p>@Model.Videogioco.Tipologia.TipologiaNome</p>
             <p>Copie disponibili:</p>
             <p>@Model.Videogioco.QuantitaDisponibile</p>
+            <p>Disponibile su:</p>
+            @if(Model.Videogioco.ListaConsole.Any())
+            @foreach(var console in Model.Videogioco.ListaConsole)
+            {
+                <p>@console.Name</p>
+            }
+            else
+            {
+            <p>TBD</p>
+            }
             <h3>Vuoi fare rifornimento?</h3>
             <form asp-controller="Admin" asp-action="Rifornisci" method="post">
                 @Html.AntiForgeryToken()

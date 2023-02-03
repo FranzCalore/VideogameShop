@@ -152,7 +152,7 @@ namespace VideogameShop.Controllers
 
             using (VideogameContext db = new VideogameContext())
             {
-                Videogioco? videogioco = db.Videogiochi.Where(p => p.Id == id).FirstOrDefault();
+                Videogioco? videogioco = db.Videogiochi.Where(p => p.Id == id).Include(c=>c.ListaConsole).FirstOrDefault();
                 if (videogioco != null)
                 {
                     videogioco.Nome = formData.Videogioco.Nome;
@@ -160,6 +160,18 @@ namespace VideogameShop.Controllers
                     videogioco.Foto = formData.Videogioco.Foto;
                     videogioco.Prezzo = formData.Videogioco.Prezzo;
                     videogioco.TipologiaId = formData.Videogioco.TipologiaId;
+                    videogioco.ListaConsole.Clear();
+                    if(formData.ListaIdConsole is not null)
+                    {
+                        foreach(string IdStringaConsole in formData.ListaIdConsole)
+                        {
+                            int IdConsole = int.Parse(IdStringaConsole);
+                            var Console = db.Consoles.Where(c=>c.Id==IdConsole).FirstOrDefault();
+                            videogioco.ListaConsole.Add(Console);
+
+                        }
+                    }
+
                     db.SaveChanges();
                 }
 
