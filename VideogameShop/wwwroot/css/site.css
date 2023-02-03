@@ -31,15 +31,15 @@ body {
     background-repeat: repeat;
 }
 #scontiplay {
-    background-image: url(/img/sconti-play.jpg) !important;
+    background-image: url(/img/sconti-ridotto-play.png) !important;
     background-repeat: repeat;
 }
 #scontinin {
-    background-image: url(/img/sconti-nin.jpg) !important;
+    background-image: url(/img/sconti-ridotto-nin.png) !important;
     background-repeat: repeat;
 }
 #scontixbox {
-    background-image: url(/img/sconti-xbox.jpg) !important;
+    background-image: url(/img/sconti-ridotto-xbox.png) !important;
     background-repeat: repeat;
 }
 
@@ -62,15 +62,15 @@ body {
     background-repeat: repeat;
 }
 #bestsellerplay {
-    background-image: url(/img/piu-venduti-playstation.jpg) !important;
+    background-image: url(/img/migliori-ridotto-play.png) !important;
     background-repeat: repeat;
 }
 #bestsellernin {
-    background-image: url(/img/piu.venduti-nin.jpg.png) !important;
+    background-image: url(/img/migliori-ridotto-nin.png) !important;
     background-repeat: repeat;
 }
 #bestsellerxbox {
-    background-image: url(/img/piu.venduti-xbox.jpg) !important;
+    background-image: url(/img/migliori-ridotto-xbox.png) !important;
     background-repeat: repeat;
 }
 
