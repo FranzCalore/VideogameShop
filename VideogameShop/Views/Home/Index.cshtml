@@ -145,7 +145,7 @@
         </div>
         <h1 class="mt-4 mb-4 text-light testogrande">Tutti i Giochi</h1>
         <div>
-            <div id="user_cards" class="row container_giochi">
+            <div class="user_cards row container_giochi">
             </div>
         </div>
     </div>
@@ -187,11 +187,11 @@
                         `
 
 
-                                    <div class="user_card">
+                                            <div class="user_card">
                                             <a class="card_link" href="/Home/Dettagli/${videogioco.id}">
                                                 <img class="card_img" src="${videogioco.foto}" alt="${videogioco.nome}">
                                                 <div class="user_card_body">
-                                                <h4 class="card_title">${videogioco.nome}</h5>
+                                                <h4 class="card_title">${videogioco.nome}</h4>
                                                 <p>${prezzo} €</p>
                                             </a>
                                             
@@ -229,12 +229,10 @@
                     .catch(error=>{console.log(error);
                     });
                     });
-
+                
                 })
                     }).catch((error) => {
                     console.log(error);
                     });
-          
-
     </script>
 }
