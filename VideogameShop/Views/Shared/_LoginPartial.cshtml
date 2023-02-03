@@ -3,7 +3,10 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<div class="testo">
+<div class="testo text-light">
+    <a asp-controller="Home" asp-action="VistaCarrello">
+    <p>Carrello: @Carrello.CarrelloCorrente.ProdottiAcquistati.Count() </p>
+    </a>
     <ul class="navbar-nav">
         @if (SignInManager.IsSignedIn(User))
         {

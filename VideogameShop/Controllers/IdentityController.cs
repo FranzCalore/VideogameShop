@@ -7,10 +7,10 @@ using VideogameShop.Models;
 
 namespace VideogameShop.Controllers
 {
-    [Authorize(Roles ="Admin")]
     public class IdentityController : Controller
     {
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Gestisci()
         {
             VideogameContext db = new();
@@ -39,6 +39,7 @@ namespace VideogameShop.Controllers
             return View(ListaUtentiRuoli);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult GestisciUtente(string id)
         {
             VideogameContext db = new();
@@ -62,6 +63,7 @@ namespace VideogameShop.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult GestisciUtente(UtenteRuoloView formData)
         {
             using VideogameContext db = new();
@@ -102,6 +104,7 @@ namespace VideogameShop.Controllers
             return RedirectToAction("Gestisci");
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Elimina(string username)
         {
             using VideogameContext db = new();
@@ -110,6 +113,32 @@ namespace VideogameShop.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Gestisci");
+        }
+        public IActionResult MieiOrdini(string username)
+        {
+            VideogameContext db = new();
+            List<Carrello> MieiOrdini = db.Carrelli.Where(c=>c.NomeUtente==username).Include(c=>c.ProdottiAcquistati).ToList();
+            foreach(Carrello carrello in MieiOrdini)
+            {
+                foreach(Acquisto acquisto in carrello.ProdottiAcquistati)
+                {
+                    Videogioco videogioco = db.Videogiochi.Where(v=>v.Id==acquisto.VideogiocoId).FirstOrDefault();
+                    acquisto.Videogioco=videogioco;
+                }
+            }
+            return View(MieiOrdini);
+        }
+
+        public IActionResult DettagliOrdine(int id)
+        {
+            using VideogameContext db = new();
+            Carrello ordine = db.Carrelli.Where(c=>c.Id==id).Include(c=>c.ProdottiAcquistati).FirstOrDefault();
+            foreach (Acquisto acquisto in ordine.ProdottiAcquistati)
+            {
+                Videogioco videogioco = db.Videogiochi.Where(v => v.Id == acquisto.VideogiocoId).FirstOrDefault();
+                acquisto.Videogioco = videogioco;
+            }
+            return View(ordine);
         }
     }
 }

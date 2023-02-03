@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VideogameShop.Database;
 
@@ -11,9 +12,11 @@ using VideogameShop.Database;
 namespace VideogameShop.Migrations
 {
     [DbContext(typeof(VideogameContext))]
-    partial class VideogameContextModelSnapshot : ModelSnapshot
+    [Migration("20230203112522_CarrelloWannabe")]
+    partial class CarrelloWannabe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace VideogameShop.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("AcquistoCarrello", b =>
-                {
-                    b.Property<int>("CarrelliId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProdottiAcquistatiAcquistoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CarrelliId", "ProdottiAcquistatiAcquistoId");
-
-                    b.HasIndex("ProdottiAcquistatiAcquistoId");
-
-                    b.ToTable("AcquistoCarrello");
-                });
 
             modelBuilder.Entity("ConsoleVideogioco", b =>
                 {
@@ -258,6 +246,9 @@ namespace VideogameShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AcquistoId"));
 
+                    b.Property<int?>("CarrelloId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DataAcquisto")
                         .HasColumnType("datetime2");
 
@@ -268,6 +259,8 @@ namespace VideogameShop.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("AcquistoId");
+
+                    b.HasIndex("CarrelloId");
 
                     b.HasIndex("VideogiocoId");
 
@@ -282,14 +275,14 @@ namespace VideogameShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("DataOra")
+                    b.Property<DateTime>("DataOra")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NomeUtente")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("PrezzoTotale")
+                    b.Property<double>("PrezzoTotale")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
@@ -431,21 +424,6 @@ namespace VideogameShop.Migrations
                     b.ToTable("Videogiochi");
                 });
 
-            modelBuilder.Entity("AcquistoCarrello", b =>
-                {
-                    b.HasOne("VideogameShop.Models.Carrello", null)
-                        .WithMany()
-                        .HasForeignKey("CarrelliId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VideogameShop.Models.Acquisto", null)
-                        .WithMany()
-                        .HasForeignKey("ProdottiAcquistatiAcquistoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ConsoleVideogioco", b =>
                 {
                     b.HasOne("VideogameShop.Models.Console", null)
@@ -514,6 +492,10 @@ namespace VideogameShop.Migrations
 
             modelBuilder.Entity("VideogameShop.Models.Acquisto", b =>
                 {
+                    b.HasOne("VideogameShop.Models.Carrello", null)
+                        .WithMany("ProdottiAcquistati")
+                        .HasForeignKey("CarrelloId");
+
                     b.HasOne("VideogameShop.Models.Videogioco", "Videogioco")
                         .WithMany("Acquisti")
                         .HasForeignKey("VideogiocoId")
@@ -549,6 +531,11 @@ namespace VideogameShop.Migrations
                         .IsRequired();
 
                     b.Navigation("Tipologia");
+                });
+
+            modelBuilder.Entity("VideogameShop.Models.Carrello", b =>
+                {
+                    b.Navigation("ProdottiAcquistati");
                 });
 
             modelBuilder.Entity("VideogameShop.Models.Fornitore", b =>
