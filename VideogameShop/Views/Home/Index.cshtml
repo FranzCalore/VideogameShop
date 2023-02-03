@@ -145,7 +145,7 @@
         </div>
         <h1 class="mt-4 mb-4 text-light testogrande">Tutti i Giochi</h1>
         <div>
-            <div class="user_cards row container_giochi">
+            <div id="user_cards" class="row container_giochi">
             </div>
         </div>
     </div>
@@ -188,6 +188,8 @@
 
 
                                             <div class="user_card">
+                                            <div class="card_border">
+                                            <div class="card-content">
                                             <a class="card_link" href="/Home/Dettagli/${videogioco.id}">
                                                 <img class="card_img" src="${videogioco.foto}" alt="${videogioco.nome}">
                                                 <div class="user_card_body">
@@ -199,6 +201,8 @@
                                             ❤
                                             <span class="spano${videogioco.id}">${videogioco.numeroLike} Like</span>
                                             </button>
+                                            </div>
+                                            </div>
                                             </div>
                                     </div>
 

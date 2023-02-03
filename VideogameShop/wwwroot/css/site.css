@@ -156,8 +156,7 @@ border-color: #cc4b37;
 }
 
 .user_card {
-    background-color: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.1);
     height: 375px;
     width: 300px;
     border-radius: 10px;
@@ -165,7 +164,7 @@ border-color: #cc4b37;
     position: relative;
 }
 
-.user_cards {
+#user_cards {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -195,19 +194,38 @@ border-color: #cc4b37;
 .card_title {
     color: white;
 }
-
-.user_card::before {
-    background: radial-gradient( 
-        800px circle at var(--mouse-x) var(--mouse-y), 
-        rgba(255,255,255, 0.06), 
-        transparent 40% 
-    );
+ 
+.user_card::before, 
+    .user_card > .card_border { 
+    
     border-radius: inherit;
     content: "";
     height: 100%;
     left: 0px;
+    opacity: 1;
+    transition: opacity 500ms;
     position: absolute;
     top: 0px;
     width: 100%;
+    z-index: 2;
+}
+
+.user_card::before {
+    background: radial-gradient( 800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255, 0.06), transparent 40% );
+    z-index: 3;
+}
+
+.user_card > .card_border {
+    background: radial-gradient( 400px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255, 0.03), transparent 40% );
+    z-index: 1;
+}
+
+.user_card > .card-content {
+    background-color: rgb(23, 23, 23);
+    border-radius: inherit;
+    height: calc(100% - 2px);
+    margin: 1px;
+    width: calc(100% - 2px);
+    position:relative;
     z-index: 2;
 }
