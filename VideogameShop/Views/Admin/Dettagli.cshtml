@@ -12,10 +12,10 @@
             <h3 class="text-center pt-4" id="prezzo_gioco">@Model.VideogiocoTipologiaView.Videogioco.Prezzo €</h3>
             <p>@Model.VideogiocoTipologiaView.Videogioco.Tipologia.TipologiaNome</p>
             <p>Copie disponibili:</p>
-            <p>@Model.Videogioco.QuantitaDisponibile</p>
+            <p>@Model.VideogiocoTipologiaView.Videogioco.QuantitaDisponibile</p>
             <p>Disponibile su:</p>
-            @if(Model.Videogioco.ListaConsole.Any())
-            @foreach(var console in Model.Videogioco.ListaConsole)
+            @if(Model.VideogiocoTipologiaView.Videogioco.ListaConsole.Any())
+            @foreach(var console in Model.VideogiocoTipologiaView.Videogioco.ListaConsole)
             {
                 <p>@console.Name</p>
             }

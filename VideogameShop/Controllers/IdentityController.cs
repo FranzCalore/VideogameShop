@@ -73,6 +73,7 @@ namespace VideogameShop.Controllers
             }
             string UsernameNormalizzato = formData.Utente.UserName.ToUpper();
             var Utente= db.Users.Where(u => u.Id == formData.Utente.Id).FirstOrDefault();
+            var NomeRuolo = db.Roles.Where(r => r.Id == formData.RuoloUtente.Id).FirstOrDefault().Name; 
             Utente.UserName = formData.Utente.UserName;
             Utente.NormalizedUserName = UsernameNormalizzato;
             var utenteruolo = db.UserRoles.Where(ur => ur.UserId == formData.Utente.Id).FirstOrDefault();
@@ -85,8 +86,12 @@ namespace VideogameShop.Controllers
             }
             else
             {
-                var poszioneutente= db.UserRoles.Where(ur => ur.UserId == formData.Utente.Id).FirstOrDefault();
-                db.UserRoles.Remove(poszioneutente);
+                if (User.Identity.Name == Utente.UserName && NomeRuolo == "Cliente")
+                {
+                    return Unauthorized("Non puoi modificare il tuo ruolo");
+                }
+                var posizioneutente= db.UserRoles.Where(ur => ur.UserId == formData.Utente.Id).FirstOrDefault();
+                db.UserRoles.Remove(posizioneutente);
                 db.SaveChanges();
                 IdentityUserRole<string> identityUserRole = new();
                 identityUserRole.UserId = formData.Utente.Id;
@@ -94,6 +99,16 @@ namespace VideogameShop.Controllers
                 db.UserRoles.Add(identityUserRole);
             }
             db.SaveChanges();
+            return RedirectToAction("Gestisci");
+        }
+
+        public IActionResult Elimina(string username)
+        {
+            using VideogameContext db = new();
+            var Utente = db.Users.Where(u => u.UserName == username).FirstOrDefault();
+            db.Remove(Utente);
+            db.SaveChanges();
+
             return RedirectToAction("Gestisci");
         }
     }
