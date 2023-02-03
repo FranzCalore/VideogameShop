@@ -124,7 +124,7 @@ namespace VideogameShop.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    if (!_userManager.Users.Any())
+                    if (_userManager.Users.Count() == 1)
                     {
                         await _userManager.AddToRoleAsync(user, "Admin");
                     }
