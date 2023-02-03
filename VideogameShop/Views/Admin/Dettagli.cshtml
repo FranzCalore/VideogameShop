@@ -1,30 +1,40 @@
-﻿@model VideogiocoTipologiaView
+﻿@using VideogameShop.Models;
+@model  ProvaView
 
 <div class="container-fluid text-center text-light">
     <div class="row align-items-center justify-content-center">
         <div class="col-lg-4">
-            <h1 class="pt-4 pb-4">@Model.Videogioco.Nome</h1>
-            <img src="@Model.Videogioco.Foto" class="img-fluid" alt="..." width="40%">
+            <h1 class="pt-4 pb-4">@Model.VideogiocoTipologiaView.Videogioco.Nome</h1>
+            <img src="@Model.VideogiocoTipologiaView.Videogioco.Foto" class="img-fluid" alt="..." width="40%">
         </div>
         <div class="col-lg-6">
-            <div><p>@Model.Videogioco.Descrizione</p></div>
-            <h3 class="text-center pt-4" id="prezzo_gioco">@Model.Videogioco.Prezzo €</h3>
-            <p>@Model.Videogioco.Tipologia.TipologiaNome</p>
+            <div><p>@Model.VideogiocoTipologiaView.Videogioco.Descrizione</p></div>
+            <h3 class="text-center pt-4" id="prezzo_gioco">@Model.VideogiocoTipologiaView.Videogioco.Prezzo €</h3>
+            <p>@Model.VideogiocoTipologiaView.Videogioco.Tipologia.TipologiaNome</p>
             <p>Copie disponibili:</p>
-            <p>@Model.Videogioco.QuantitaDisponibile</p>
+            <p>@Model.VideogiocoTipologiaView.Videogioco.QuantitaDisponibile</p>
             <h3>Vuoi fare rifornimento?</h3>
             <form asp-controller="Admin" asp-action="Rifornisci" method="post">
                 @Html.AntiForgeryToken()
-                <input asp-for="Videogioco.Id" type="hidden" value="@Model.Videogioco.Id" />
-                <input asp-for="Videogioco.Nome" type="hidden" class="form-control" id="inputNome">
-                <input asp-for="Videogioco.Descrizione" type="hidden" class="form-control" id="inputDescrizione">
-                <input asp-for="Videogioco.Prezzo" type="hidden" class="form-control" id="inputPrezzo">
-                <input asp-for="Videogioco.Foto" type="hidden" class="form-control" id="inputImmagine">
+                <input asp-for="VideogiocoTipologiaView.Videogioco.Id" type="hidden" value="@Model.VideogiocoTipologiaView.Videogioco.Id" />
+                <input asp-for="VideogiocoTipologiaView.Videogioco.Nome" type="hidden" class="form-control" id="inputNome">
+                <input asp-for="VideogiocoTipologiaView.Videogioco.Descrizione" type="hidden" class="form-control" id="inputDescrizione">
+                <input asp-for="VideogiocoTipologiaView.Videogioco.Prezzo" type="hidden" class="form-control" id="inputPrezzo">
+                <input asp-for="VideogiocoTipologiaView.Videogioco.Foto" type="hidden" class="form-control" id="inputImmagine">
                 <label>Numero copie da ordinare:</label>
-                <input asp-for="Rifornimento.Quantita" id="campo_quantita" type="number" min="1" max="100" />
+                <input asp-for="VideogiocoTipologiaView.Rifornimento.Quantita" id="campo_quantita" type="number" min="1" max="100" />
                 <label>Fornitore:</label>
-                <input asp-for="Rifornimento.Fornitore.FornitoreNome" type="text" />
-                <input asp-for="Rifornimento.Prezzo" id="campo_prezzo" type="text" /> €
+                <select asp-for="RifornimentoFornitoreView.RifornimentoVideogioco.Id" class="d-block w-100">
+                    <option value=""></option>
+                    @foreach (Fornitore fornitore in Model.RifornimentoFornitoreView.ListaFornitori)
+                    {
+                        <option value="@fornitore.FornitoreId">@fornitore.FornitoreNome</option>
+                    }
+
+                    <span asp-validation-for="RifornimentoFornitoreView.RifornimentoVideogioco.Id" class="text-danger"></span>
+                </select>
+                <input asp-for="VideogiocoTipologiaView.Rifornimento.Fornitore.FornitoreNome" type="text" />
+                <input asp-for="VideogiocoTipologiaView.Rifornimento.Prezzo" id="campo_prezzo" type="text" /> €
                 <button type="submit" class="btn btn-primary">Rifornisci</button>
             </form>
         </div>

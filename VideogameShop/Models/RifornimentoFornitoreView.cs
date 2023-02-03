@@ -1,4 +1,4 @@
-﻿using VideogameShop.Models;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace VideogameShop.Models
 {
