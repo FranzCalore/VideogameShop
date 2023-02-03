@@ -14,11 +14,11 @@
             <p>Copie disponibili:</p>
             <p>@Model.VideogiocoTipologiaView.Videogioco.QuantitaDisponibile</p>
             <p>Disponibile su:</p>
-            @if (Model.VideogiocoTipologiaView.Videogioco.ListaConsole.Any())
-                @foreach (var console in Model.VideogiocoTipologiaView.Videogioco.ListaConsole)
-                {
-                    <p>@console.Name</p>
-                }
+            @if(Model.VideogiocoTipologiaView.Videogioco.ListaConsole.Any())
+            @foreach(var console in Model.VideogiocoTipologiaView.Videogioco.ListaConsole)
+            {
+                <p>@console.Name</p>
+            }
             else
             {
                 <p>TBD</p>
