@@ -39,6 +39,16 @@ namespace VideogameShop.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        [HttpGet]
+        public IActionResult Messaggio(int id)
+        {
+            using VideogameContext db = new();
+            MessaggioPrivato messaggio = db.Messaggi.Where(m => m.Id == id).FirstOrDefault();
+            messaggio.MessaggioLetto = true;
+            db.SaveChanges();
+            return View(messaggio);
+        }
     }
 
 }

@@ -1,0 +1,65 @@
+﻿@model List<MessaggioPrivato>
+
+
+<div class="backgroundOpaco text-center p-3">
+
+    <h1>I Miei Messaggi</h1>
+
+    <h3 class="my-3"><a asp-controller="Messaggi" asp-action="NuovoMessaggio">Nuovo Messaggio</a></h3>
+
+    @if (Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th>
+                        Titolo Messaggio
+                    </th>
+                    <th>
+                        Data Messaggio
+                    </th>
+                    <th>
+                        Mittente
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (MessaggioPrivato messaggio in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (!messaggio.MessaggioLetto)
+                            {
+                                <p>**NEW**</p>
+                            }
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Messaggio","Messaggi",new{id=messaggio.Id})">@messaggio.Titolo</a>
+                        </td>
+                        <td>
+                            @messaggio.DataOra
+                        </td>
+                        <td>
+                            @messaggio.Mittente.UserName
+                        </td>
+                        <td>
+                            <a class="btn btn-danger">Elimina Messaggio</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h2 class="text-center">Sembra non ci siano messaggi D: </h2>
+    }
+
+</div>
+

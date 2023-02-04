@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VideogameShop.Database;
 
@@ -11,9 +12,11 @@ using VideogameShop.Database;
 namespace VideogameShop.Migrations
 {
     [DbContext(typeof(VideogameContext))]
-    partial class VideogameContextModelSnapshot : ModelSnapshot
+    [Migration("20230204091116_WhoWannaChatWithCarrelli")]
+    partial class WhoWannaChatWithCarrelli
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,6 +285,9 @@ namespace VideogameShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool?>("CarrelloInviato")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("DataOra")
                         .HasColumnType("datetime2");
 
@@ -356,7 +362,7 @@ namespace VideogameShop.Migrations
                     b.Property<string>("DestinatarioId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<bool>("MessaggioLetto")
+                    b.Property<bool?>("MessaggioLetto")
                         .HasColumnType("bit");
 
                     b.Property<string>("MittenteId")
