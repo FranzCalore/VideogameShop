@@ -1,5 +1,5 @@
 ﻿@using VideogameShop.Models;
-@model  ProvaView
+@model ProvaView
 
 <div class="container-fluid text-center text-light">
     <div class="row align-items-center justify-content-center">
@@ -21,7 +21,7 @@
             }
             else
             {
-            <p>TBD</p>
+                <p>TBD</p>
             }
             <h3>Vuoi fare rifornimento?</h3>
             <form asp-controller="Admin" asp-action="Rifornisci" method="post">
@@ -57,12 +57,12 @@
 
         document.getElementById('campo_quantita').addEventListener('keyup', Calcoloprezzo);
 
-        function Calcoloprezzo(){
+        function Calcoloprezzo() {
             let prezzo = document.getElementById('prezzo_gioco').innerHTML;
             let prezzocifra = parseInt(prezzo);
             let quantita = document.getElementById('campo_quantita').value;
-            let prezzoRifornimento = (prezzocifra/2)*quantita;
-            document.getElementById('campo_prezzo').value=prezzoRifornimento
+            let prezzoRifornimento = (prezzocifra / 2) * quantita;
+            document.getElementById('campo_prezzo').value = prezzoRifornimento
 
         }
 
@@ -72,5 +72,5 @@
 
 
 
-        </script>
-        }
+    </script>
+}
