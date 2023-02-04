@@ -194,10 +194,18 @@ border-color: #cc4b37;
 .card_title {
     color: white;
 }
- 
-.user_card::before, 
-    .user_card > .card_border { 
-    
+
+#user_cards:hover > .user_card > .card_border {
+    opacity: 1;
+}
+
+.user_card:hover::before {
+    opacity: 1;
+    pointer-events: none;
+}
+
+.user_card::before,
+.user_card > .card_border {
     border-radius: inherit;
     content: "";
     height: 100%;
@@ -208,11 +216,13 @@ border-color: #cc4b37;
     top: 0px;
     width: 100%;
     z-index: 2;
+    pointer-events: none;
 }
 
 .user_card::before {
     background: radial-gradient( 800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255, 0.06), transparent 40% );
     z-index: 3;
+    pointer-events: none;
 }
 
 .user_card > .card_border {
