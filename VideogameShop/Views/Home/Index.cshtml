@@ -102,26 +102,26 @@
     <div class="container text-center">
         <div class="row">
             <div class="col-3">
-                <button class="btn">
+                <button id="bottonexbox" class="btn">
                     <img class="imgbottone"
                          src="/img/1024px-Xbox_one_logo.svg.png" width="30" />
                 </button>
             </div>
             <div class="col-3">
-                <button class="btn">
+                <button id="bottoneps" class="btn">
                     <img class="imgbottone"
                          src="/img/Playstation-Logo-Transparent-Image.png"
                          width="30" />
                 </button>
             </div>
             <div class="col-3">
-                <button class="btn">
+                <button id="bottoneswitch" class="btn">
                     <img class="imgbottone"
                          src="/img/nintendo-switch-logos-85735.png" width="30" />
                 </button>
             </div>
             <div class="col-3">
-                <button class="btn">
+                <button id="bottonepc" class="btn">
                     <img class="imgbottone"
                          src="/img/computer-keyboard-and-mouse-icon-11549778001glpeo1dkdh.png"
                          width="30" />
@@ -214,6 +214,7 @@
             axios.get("/api/HomeApi", {
             }).then((res) => {
                 res.data.forEach(videogioco=> {
+                if (document.querySelector(`.botono${videogioco.id}`) !== null) {
                     document.querySelector(`.botono${videogioco.id}`).addEventListener("click", function() {
                         document.querySelector(`.botono${videogioco.id}`).classList.toggle("liked");
                     if (!document.querySelector(`.botono${videogioco.id}`).classList.contains("liked")){
@@ -230,12 +231,73 @@
                     .catch(error=>{console.log(error);
                     });
                     });
+                    }
 
                 })
                     }).catch((error) => {
                     console.log(error);
                     });
-          
+                              
+                    document.getElementById("bottonepc").addEventListener("click", giochipc)
+                    function giochipc(){
+            let searchPc = "pc"
+            caricaGiochi(searchPc)
+            Likebutton();
+                    }
+
+        document.getElementById("bottoneswitch").addEventListener("click", giochiswitch)
+        function giochiswitch() {
+            let searchswitch = "switch"
+            caricaGiochi(searchswitch)
+            Likebutton()
+        }
+
+        document.getElementById("bottoneps").addEventListener("click", giochips)
+        function giochips() {
+            let searchps = "playstation"
+            caricaGiochi(searchps)
+            Likebutton()
+        }
+
+        document.getElementById("bottonexbox").addEventListener("click", giochixbox)
+        function giochixbox() {
+            let searchxbox = "xbox"
+            caricaGiochi(searchxbox)
+            Likebutton()
+        }
+
+        function Likebutton(){
+            axios.get("/api/HomeApi", {
+            }).then((res) => {
+                res.data.forEach(videogioco => {
+                    if(document.querySelector(`.botono${videogioco.id}`) !== null){
+                        document.querySelector(`.botono${videogioco.id}`).addEventListener("click", function () {
+                            debugger;
+                            document.querySelector(`.botono${videogioco.id}`).classList.toggle("liked");
+                            if (!document.querySelector(`.botono${videogioco.id}`).classList.contains("liked")) {
+                                videogioco.numeroLike--;
+                            }
+                            else {
+                                videogioco.numeroLike++;
+                            }
+                            document.querySelector(`.spano${videogioco.id}`).innerHTML = videogioco.numeroLike + " Like";
+                            axios.put(`/api/HomeApi/${videogioco.id}`, videogioco, {
+                            })
+                                .then(response => {
+                                    console.log(response);
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                });
+                        });
+                    }
+                    })
+            }).catch((error) => {
+                console.log(error);
+            });
+                    
+                    
+        }
 
     </script>
 }

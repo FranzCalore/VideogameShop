@@ -25,9 +25,10 @@ namespace VideogameShop.Controllers
             {
                 search = search.ToLower();
                 ListaVideogiochi = db.Videogiochi.Include(V=>V.Tipologia)
+                                                 .Include(V=>V.ListaConsole)
                                                  .Where(V => V.Nome.ToLower().Contains(search) ||                                         
                                                         V.Tipologia.TipologiaNome.ToLower().Contains(search) ||
-                                                        V.Descrizione.ToLower().Contains(search))
+                                                        V.ListaConsole.Any(c=>c.Name.ToLower().Contains(search)))
                                                  .ToList();
             }
             return Ok(ListaVideogiochi);
