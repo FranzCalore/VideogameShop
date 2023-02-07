@@ -221,17 +221,25 @@ namespace VideogameShop.Controllers
                     dataForm.ListaFornitori = listafornitori;
                     return View("Dettagli", dataForm);
                 }
-
-                Fornitore fornitoreDb = db.Fornitori.Where(f => f.FornitoreNome == dataForm.RifornimentoVideogioco.Fornitore.FornitoreNome).FirstOrDefault();
-                if (fornitoreDb is null)
+                Fornitore fornitoreDb = new();
+                if (dataForm.RifornimentoVideogioco.Fornitore is not null)
                 {
-                    Fornitore fornitoreForm = new();
-                    fornitoreForm.FornitoreNome = dataForm.RifornimentoVideogioco.Fornitore.FornitoreNome;
-                    db.Fornitori.Add(fornitoreForm);
-                    db.SaveChanges();
+
+                    fornitoreDb = db.Fornitori.Where(f => f.FornitoreNome == dataForm.RifornimentoVideogioco.Fornitore.FornitoreNome).FirstOrDefault();
+                    if (fornitoreDb is null)
+                    {
+                        Fornitore fornitoreForm = new();
+                        fornitoreForm.FornitoreNome = dataForm.RifornimentoVideogioco.Fornitore.FornitoreNome;
+                        db.Fornitori.Add(fornitoreForm);
+                        db.SaveChanges();
+                    }
+                    fornitoreDb = db.Fornitori.Where(f => f.FornitoreNome == dataForm.RifornimentoVideogioco.Fornitore.FornitoreNome).FirstOrDefault();
+                    //Rifornimento rifornimento = dataForm.Rifornimento;
                 }
-                fornitoreDb = db.Fornitori.Where(f => f.FornitoreNome == dataForm.RifornimentoVideogioco.Fornitore.FornitoreNome).FirstOrDefault();
-                //Rifornimento rifornimento = dataForm.Rifornimento;
+                else
+                {
+                    fornitoreDb = db.Fornitori.Where(f => f.FornitoreId == dataForm.RifornimentoVideogioco.FornitoreId).FirstOrDefault();
+                }
                 Rifornimento rifornimento = dataForm.RifornimentoVideogioco;
                 videogioco.QuantitaDisponibile = videogioco.QuantitaDisponibile + rifornimento.Quantita;
                 rifornimento.Data = DateTime.Now;

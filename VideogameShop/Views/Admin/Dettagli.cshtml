@@ -33,16 +33,17 @@
                 <label>Numero copie da ordinare:</label>
                 <input asp-for="RifornimentoVideogioco.Quantita" id="campo_quantita" type="number" min="1" max="100" />
                 <label>Fornitore:</label>
-                <select asp-for="RifornimentoVideogioco.FornitoreId" class="d-block w-100">
+                <select id="campoFornitore" asp-for="RifornimentoVideogioco.FornitoreId" class="d-block w-100">
                     <option value=""></option>
                     @foreach (Fornitore fornitore in Model.ListaFornitori)
                     {
                         <option value="@fornitore.FornitoreId">@fornitore.FornitoreNome</option>
                     }
+                    <option value="0">Altro</option>
 
                     <span asp-validation-for="RifornimentoVideogioco.FornitoreId" class="text-danger"></span>
                 </select>
-                <input asp-for="RifornimentoVideogioco.Fornitore.FornitoreNome" type="text" />
+                <input id="campoNomeFornitore" type="text" class="d-none" asp-for="RifornimentoVideogioco.Fornitore.FornitoreNome" disabled type="text" />
                 <input asp-for="RifornimentoVideogioco.Prezzo" id="campo_prezzo" type="text" /> €
                 <button type="submit" class="btn btn-primary">Rifornisci</button>
             </form>
@@ -65,7 +66,19 @@
 
         }
 
+        document.getElementById("campoFornitore").addEventListener("change", nomeFornitore);
+        
+        function nomeFornitore(){
+            if(document.getElementById("campoFornitore").value=="0"){
+                document.getElementById("campoNomeFornitore").removeAttribute("disabled");
+                document.getElementById("campoNomeFornitore").classList.remove("d-none")
+            }
+            else{
+                document.getElementById("campoNomeFornitore").setAttribute("disabled");
+                document.getElementById("campoNomeFornitore").classList.add("d-none")
+            }
 
+        }
 
 
 
