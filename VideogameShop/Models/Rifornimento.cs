@@ -8,7 +8,7 @@
 
         public Videogioco? Videogioco { get; set; }
 
-        public int VideogiocoId { get; set; }
+        public int? VideogiocoId { get; set; }
 
         public int Quantita { get; set; }
 

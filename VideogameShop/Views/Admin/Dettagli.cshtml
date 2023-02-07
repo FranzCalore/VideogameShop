@@ -1,21 +1,21 @@
 ﻿@using VideogameShop.Models;
-@model ProvaView
+@model RifornimentoFornitoreView
 
 <div class="container-fluid text-center text-light">
     <div class="row align-items-center justify-content-center">
         <div class="col-lg-4">
-            <h1 class="pt-4 pb-4">@Model.VideogiocoTipologiaView.Videogioco.Nome</h1>
-            <img src="@Model.VideogiocoTipologiaView.Videogioco.Foto" class="img-fluid" alt="..." width="40%">
+            <h1 class="pt-4 pb-4">@Model.RifornimentoVideogioco.Videogioco.Nome</h1>
+            <img src="@Model.RifornimentoVideogioco.Videogioco.Foto" class="img-fluid" alt="..." width="40%">
         </div>
         <div class="col-lg-6">
-            <div><p>@Model.VideogiocoTipologiaView.Videogioco.Descrizione</p></div>
-            <h3 class="text-center pt-4" id="prezzo_gioco">@Model.VideogiocoTipologiaView.Videogioco.Prezzo €</h3>
-            <p>@Model.VideogiocoTipologiaView.Videogioco.Tipologia.TipologiaNome</p>
+            <div><p>@Model.RifornimentoVideogioco.Videogioco.Descrizione</p></div>
+            <h3 class="text-center pt-4" id="prezzo_gioco">@Model.RifornimentoVideogioco.Videogioco.Prezzo €</h3>
+            <p>@Model.RifornimentoVideogioco.Videogioco.Tipologia.TipologiaNome</p>
             <p>Copie disponibili:</p>
-            <p>@Model.VideogiocoTipologiaView.Videogioco.QuantitaDisponibile</p>
+            <p>@Model.RifornimentoVideogioco.Videogioco.QuantitaDisponibile</p>
             <p>Disponibile su:</p>
-            @if(Model.VideogiocoTipologiaView.Videogioco.ListaConsole.Any())
-            @foreach(var console in Model.VideogiocoTipologiaView.Videogioco.ListaConsole)
+            @if(Model.RifornimentoVideogioco.Videogioco.ListaConsole.Any())
+            @foreach(var console in Model.RifornimentoVideogioco.Videogioco.ListaConsole)
             {
                 <p>@console.Name</p>
             }
@@ -26,25 +26,24 @@
             <h3>Vuoi fare rifornimento?</h3>
             <form asp-controller="Admin" asp-action="Rifornisci" method="post">
                 @Html.AntiForgeryToken()
-                <input asp-for="VideogiocoTipologiaView.Videogioco.Id" type="hidden" value="@Model.VideogiocoTipologiaView.Videogioco.Id" />
-                <input asp-for="VideogiocoTipologiaView.Videogioco.Nome" type="hidden" class="form-control" id="inputNome">
-                <input asp-for="VideogiocoTipologiaView.Videogioco.Descrizione" type="hidden" class="form-control" id="inputDescrizione">
-                <input asp-for="VideogiocoTipologiaView.Videogioco.Prezzo" type="hidden" class="form-control" id="inputPrezzo">
-                <input asp-for="VideogiocoTipologiaView.Videogioco.Foto" type="hidden" class="form-control" id="inputImmagine">
+                <input asp-for="RifornimentoVideogioco.Videogioco.Id" type="hidden" />
+                <input asp-for="RifornimentoVideogioco.Videogioco.Nome" type="hidden" />
+                <input asp-for="RifornimentoVideogioco.Videogioco.Foto" type="hidden" />
+                <input asp-for="RifornimentoVideogioco.Videogioco.Descrizione" type="hidden" />
                 <label>Numero copie da ordinare:</label>
-                <input asp-for="VideogiocoTipologiaView.Rifornimento.Quantita" id="campo_quantita" type="number" min="1" max="100" />
+                <input asp-for="RifornimentoVideogioco.Quantita" id="campo_quantita" type="number" min="1" max="100" />
                 <label>Fornitore:</label>
-                <select asp-for="RifornimentoFornitoreView.RifornimentoVideogioco.Id" class="d-block w-100">
+                <select asp-for="RifornimentoVideogioco.FornitoreId" class="d-block w-100">
                     <option value=""></option>
-                    @foreach (Fornitore fornitore in Model.RifornimentoFornitoreView.ListaFornitori)
+                    @foreach (Fornitore fornitore in Model.ListaFornitori)
                     {
                         <option value="@fornitore.FornitoreId">@fornitore.FornitoreNome</option>
                     }
 
-                    <span asp-validation-for="RifornimentoFornitoreView.RifornimentoVideogioco.Id" class="text-danger"></span>
+                    <span asp-validation-for="RifornimentoVideogioco.FornitoreId" class="text-danger"></span>
                 </select>
-                <input asp-for="VideogiocoTipologiaView.Rifornimento.Fornitore.FornitoreNome" type="text" />
-                <input asp-for="VideogiocoTipologiaView.Rifornimento.Prezzo" id="campo_prezzo" type="text" /> €
+                <input asp-for="RifornimentoVideogioco.Fornitore.FornitoreNome" type="text" />
+                <input asp-for="RifornimentoVideogioco.Prezzo" id="campo_prezzo" type="text" /> €
                 <button type="submit" class="btn btn-primary">Rifornisci</button>
             </form>
         </div>

@@ -14,6 +14,8 @@ namespace VideogameShop.Models
 
         public List<SelectListItem>? ListaConsole { get; set; }
 
+        public Fornitore? Fornitore { get; set; }
+
         public List<string>? ListaIdConsole { get; set; }
 
     }
