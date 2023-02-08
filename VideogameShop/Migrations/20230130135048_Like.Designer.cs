@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VideogameShop.Database;
 
@@ -11,9 +12,11 @@ using VideogameShop.Database;
 namespace VideogameShop.Migrations
 {
     [DbContext(typeof(VideogameContext))]
-    partial class VideogameContextModelSnapshot : ModelSnapshot
+    [Migration("20230130135048_Like")]
+    partial class Like
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -306,9 +309,6 @@ namespace VideogameShop.Migrations
 
                     b.Property<string>("Foto")
                         .IsRequired()
-                        .HasColumnType("varchar(300)");
-
-                    b.Property<string>("FotoOrizzontale")
                         .HasColumnType("varchar(300)");
 
                     b.Property<string>("Nome")

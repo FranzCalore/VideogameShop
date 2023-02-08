@@ -46,5 +46,15 @@ namespace VideogameShop.Controllers
             return Ok(videogioco);
         }
 
+        [HttpPut("{id}")]
+        public IActionResult Like(int id, [FromBody]Videogioco videogioco)
+        {
+            using VideogameContext db = new();
+            Videogioco videogame = db.Videogiochi.Where(vi => vi.Id == videogioco.Id).FirstOrDefault();
+            videogame.NumeroLike = videogioco.NumeroLike;
+            db.SaveChanges();
+            return Ok(videogioco.NumeroLike);
+        }
+
     }
 }

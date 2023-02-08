@@ -1,3 +1,7 @@
+:root {
+    --card-color: rgb(23,23,23);
+}
+
 html {
   font-size: 14px;
 }
@@ -81,4 +85,174 @@ body {
 
 a:link {
     text-decoration: none;
+    color:white;
+}
+
+.button-like {
+    border: 2px solid #8a8a8a;
+    background-color: transparent;
+    text-decoration: none;
+    padding: 1rem;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    border-radius: 3rem;
+    color: #8a8a8a;
+    transition: all ease 0.4s;
+}
+
+.button-like span {
+    margin-left: 0.5rem;
+}
+
+.button-like .fa,
+.button-like span {
+    transition: all ease 0.4s;
+}
+
+.button-like:focus {
+    background-color: transparent;
+}
+
+.button-like:focus .fa,
+.button-like:focus span {
+    color: #8a8a8a;
+}
+
+.button-like:hover {
+    border-color: #cc4b37;
+    background-color: transparent;
+}
+
+.button-like:hover .fa,
+.button-like:hover span {
+    color: #cc4b37;
+}
+
+.liked {
+    background-color: #cc4b37;
+    border-color: #cc4b37;
+}
+
+.liked .fa,
+.liked span {
+    color: #fefefe;
+}
+
+.liked:focus {
+    background-color: #cc4b37;
+}
+
+.liked:focus .fa,
+.liked:focus span {
+    color: #fefefe;
+}
+
+.liked:hover {
+background-color: #cc4b37;
+border-color: #cc4b37;
+}
+
+.liked:hover .fa,
+.liked:hover span {
+    color: #fefefe;
+}
+
+.user_card {
+    background-color: rgba(255, 255, 255, 0.1);
+    height: 395px;
+    width: 348px;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+#user_cards {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 1450px;
+    width: calc(100% - 20px);
+    cursor: pointer;
+}
+
+.card_img {
+    max-height: 250px;
+    margin-top: 10px;
+}
+
+.card_link {
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+.user_card_body {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card_title {
+    color: white;
+}
+
+#user_cards:hover > .user_card > .user_card_border {
+    opacity: 1;
+}
+
+.user_card:hover::before{
+    opacity: 1;
+    pointer-events: none;
+}
+
+.user_card::before,
+.user_card > .user_card_border {
+    border-radius: inherit;
+    content: "";
+    height: 100%;  
+    left: 0px;
+    opacity: 0;
+    transition: opacity 500ms;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.user_card::before {
+    background: radial-gradient( 
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255,255,255, 0.06),
+    transparent 40%
+    );
+    z-index: 3;
+    pointer-events: none;
+}
+
+.user_card > .user_card_border {
+    background: radial-gradient( 
+    400px circle at var(--mouse-x) var(--mouse-y), 
+    rgba(255,255,255, 0.3),
+    transparent 40%
+    );
+    z-index: 1;
+}
+
+.user_card > .user_card_content {
+    background-color: var(--card-color);
+    border-radius: inherit;
+    height: calc(100% - 4px);
+    margin-top: 2px;
+    width: 344px;
+    position: relative;
+    left: -10px;
+    z-index: 2;
+}
+
+.user_card-content {
+    pointer-events: all;
 }
