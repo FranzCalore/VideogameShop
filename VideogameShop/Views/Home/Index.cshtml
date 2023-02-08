@@ -60,7 +60,7 @@
                 <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"
                         aria-label="Slide 3"></button>
             </div>
-            <div class="carousel-inner">
+            <div class="carousel-inner carosello_like">
                 <div class="carousel-item active">
                     <img src="https://s2.gaming-cdn.com/images/products/7111/380x218/forspoken-pc-gioco-steam-europe-cover.jpg?v=1674774000"
                          class="w-75" alt="...">
@@ -102,26 +102,26 @@
     <div class="container text-center">
         <div class="row">
             <div class="col-3">
-                <button class="btn">
+                <button id="bottonexbox" class="btn">
                     <img class="imgbottone"
                          src="/img/1024px-Xbox_one_logo.svg.png" width="30" />
                 </button>
             </div>
             <div class="col-3">
-                <button class="btn">
+                <button id="bottoneps" class="btn">
                     <img class="imgbottone"
                          src="/img/Playstation-Logo-Transparent-Image.png"
                          width="30" />
                 </button>
             </div>
             <div class="col-3">
-                <button class="btn">
+                <button id="bottoneswitch" class="btn">
                     <img class="imgbottone"
                          src="/img/nintendo-switch-logos-85735.png" width="30" />
                 </button>
             </div>
             <div class="col-3">
-                <button class="btn">
+                <button id="bottonepc" class="btn">
                     <img class="imgbottone"
                          src="/img/computer-keyboard-and-mouse-icon-11549778001glpeo1dkdh.png"
                          width="30" />
@@ -167,7 +167,7 @@
 
         caricaGiochi();
 
-        function Like(id){
+        function Like(id) {
             axios.post("/api/HomeApi")
         }
 
@@ -205,37 +205,152 @@
                                             </div>
                                             </div>
 
-                                    `
-                    
+                                                                            `
+
                 });
             }).catch((error) => {
                 console.log(error);
             });
         }
-            
+
+        axios.get("/api/HomeApi", {
+        }).then((res) => {
+            res.data.forEach(videogioco => {
+                if (document.querySelector(`.botono${videogioco.id}`) !== null) {
+                    document.querySelector(`.botono${videogioco.id}`).addEventListener("click", function () {
+                        document.querySelector(`.botono${videogioco.id}`).classList.toggle("liked");
+                        if (!document.querySelector(`.botono${videogioco.id}`).classList.contains("liked")) {
+                            videogioco.numeroLike--;
+                        }
+                        else {
+                            videogioco.numeroLike++;
+                        }
+                        document.querySelector(`.spano${videogioco.id}`).innerHTML = videogioco.numeroLike + " Like";
+                        axios.put(`/api/HomeApi/${videogioco.id}`, videogioco, {
+                        })
+                            .then(response => {
+                                console.log(response);
+                            })
+                            .catch(error => {
+                                console.log(error);
+                            });
+                    });
+                }
+
+            })
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        document.getElementById("bottonepc").addEventListener("click", giochipc)
+        function giochipc() {
+            let searchPc = "pc"
+            caricaGiochi(searchPc)
+            Likebutton();
+        }
+
+        document.getElementById("bottoneswitch").addEventListener("click", giochiswitch)
+        function giochiswitch() {
+            let searchswitch = "switch"
+            caricaGiochi(searchswitch)
+            Likebutton()
+        }
+
+        document.getElementById("bottoneps").addEventListener("click", giochips)
+        function giochips() {
+            let searchps = "playstation"
+            caricaGiochi(searchps)
+            Likebutton()
+        }
+
+        document.getElementById("bottonexbox").addEventListener("click", giochixbox)
+        function giochixbox() {
+            let searchxbox = "xbox"
+            caricaGiochi(searchxbox)
+            Likebutton()
+        }
+
+        function Likebutton() {
             axios.get("/api/HomeApi", {
             }).then((res) => {
-                res.data.forEach(videogioco=> {
-                    document.querySelector(`.botono${videogioco.id}`).addEventListener("click", function() {
-                        document.querySelector(`.botono${videogioco.id}`).classList.toggle("liked");
-                    if (!document.querySelector(`.botono${videogioco.id}`).classList.contains("liked")){
-                        videogioco.numeroLike--;
+                res.data.forEach(videogioco => {
+                    if (document.querySelector(`.botono${videogioco.id}`) !== null) {
+                        document.querySelector(`.botono${videogioco.id}`).addEventListener("click", function () {
+                            debugger;
+                            document.querySelector(`.botono${videogioco.id}`).classList.toggle("liked");
+                            if (!document.querySelector(`.botono${videogioco.id}`).classList.contains("liked")) {
+                                videogioco.numeroLike--;
+                            }
+                            else {
+                                videogioco.numeroLike++;
+                            }
+                            document.querySelector(`.spano${videogioco.id}`).innerHTML = videogioco.numeroLike + " Like";
+                            axios.put(`/api/HomeApi/${videogioco.id}`, videogioco, {
+                            })
+                                .then(response => {
+                                    console.log(response);
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                });
+                        });
                     }
-                    else{
-                        videogioco.numeroLike++;
-                    }
-                    document.querySelector(`.spano${videogioco.id}`).innerHTML=videogioco.numeroLike + " Like";
-                    axios.put(`/api/HomeApi/${videogioco.id}`, videogioco, {
-                    })
-                    .then(response=>{console.log(response);
-                    })
-                    .catch(error=>{console.log(error);
-                    });
-                    });
-                
                 })
-                    }).catch((error) => {
-                    console.log(error);
-                    });
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+
+        CaroselloLike();
+
+        function CaroselloLike() {
+            axios.get("/api/HomeApi", {
+            }).then((res) => {
+                console.log("Risultato ok", res);
+
+                document.querySelector('.carosello_like').innerHTML = '';
+
+                for (let i = 0; i < 3; i++) {
+                    let prezzo = res.data[i].prezzo.toFixed(2);
+                    prezzo = prezzo.replace(".", ",");
+                    if (i == 0) {
+                        document.querySelector(".carosello_like").innerHTML +=
+                            `
+
+                                                                                            <div class="carousel-item active">
+                                                    <img src="${res.data[i].foto}"
+                                                         class="w-75" alt="...">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <h5>${res.data[i].nome}</h5>
+                                                        <p>${res.data[i].prezzo} €</p>
+                                                        <p>${res.data[i].numeroLike} ❤</p>
+                                                    </div>
+
+                                                                                            `
+                    }
+                    else {
+
+
+                        document.querySelector(".carosello_like").innerHTML +=
+                            `
+
+                                                                                    <div class="carousel-item">
+                                            <img src="${res.data[i].foto}"
+                                                 class="w-75" alt="...">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>${res.data[i].nome}</h5>
+                                                <p>${res.data[i].prezzo} €</p>
+                                                <p>${res.data[i].numeroLike} ❤</p>
+                                            </div>
+
+                                                                                    `
+                    }
+
+                };
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+
     </script>
 }

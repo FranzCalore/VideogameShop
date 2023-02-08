@@ -43,7 +43,7 @@ else
                         <td><a class="btn btn-primary" href="@Url.Action("Modifica","Admin", new{id=videogioco.Id})">Modifica Videogioco</a></td>
                         <td><a class="btn btn-danger" href="@Url.Action("Elimina","Admin", new{id=videogioco.Id})">Elimina Videogioco</a></td>
                         <td>@stringaQuantita</td>
-                        <td><a class="btn btn-success" href="@Url.Action("Rifornisci","Admin", new{id=videogioco.Id})">Rifornisci</a></td>
+                        <td><a class="btn btn-success" href="@Url.Action("Dettagli","Admin", new{id=videogioco.Id})">Rifornisci</a></td>
                     </tr>
                 }
             </tbody>

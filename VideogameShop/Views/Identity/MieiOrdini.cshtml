@@ -1,0 +1,47 @@
+﻿@model List<Carrello>
+
+@{
+    ViewData["Title"] = "MieiOrdini";
+}
+
+<div class="backgroundOpaco text-center p-3">
+<h1>I MieiOrdini</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Data Ordine
+            </th>
+            <th>
+                Prodotti Ordinati
+            </th>
+            <th>
+                Prezzo Ordine
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (Carrello carrello in Model) {
+        <tr>
+            <td>
+                @carrello.DataOra.Value.ToShortDateString();
+            </td>
+            <td>
+                    @foreach(Acquisto acquisto in carrello.ProdottiAcquistati)
+                    {
+                        <p>- @acquisto.Videogioco.Nome</p>
+                    }
+            </td>
+            <td>
+                <p>@carrello.PrezzoTotale €</p>
+            </td>
+            <td>
+                <a asp-action="DettagliOrdine" asp-route-id="@carrello.Id">DettagliOrdine</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

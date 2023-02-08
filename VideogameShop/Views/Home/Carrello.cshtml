@@ -1,0 +1,19 @@
+﻿
+<div class="backgroundOpacoDritto">
+    @if (Carrello.CarrelloCorrente.ProdottiAcquistati.Count > 0)
+    {
+
+        @foreach (Acquisto acquisto in Carrello.CarrelloCorrente.ProdottiAcquistati)
+        {
+            <p>Nome Prodotto: @acquisto.Videogioco.Nome  - Quantità Prodotto: @acquisto.Quantita - Prezzo: @(
+        acquisto.Videogioco.Prezzo * acquisto.Quantita
+        ) <a href="@Url.Action("RimuoviElemento", "Home", new{id=acquisto.VideogiocoId})" class="btn btn-danger">Rimuovi</a></p>
+        }
+
+        <a href="@Url.Action("ConfermaAcquisto", "Home")" class="btn btn-info">Conferma Acquisto</a>
+    }
+    else
+    {
+        <h3 class="text-center py-5">Il tuo carrello è ancora vuoto, Space Cowboy</h3>
+    }
+</div>

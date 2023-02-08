@@ -1,5 +1,6 @@
 ﻿@model VideogiocoTipologiaView
 
+<div class="backgroundOpacoDritto">
 <h1>Modifica Videogioco</h1>
 <form asp-controller="Admin" asp-action="Modifica" method="post" class="row g-3">
     <div class="col-12">
@@ -33,6 +34,11 @@
         </select>
     </div><br><br>
     <div class="col-12">
+        <label>Piattaforme di uscita:</label>
+        <select asp-for="ListaIdConsole" asp-items="@Model.ListaConsole"></select>
+    </div><br><br>
+    <div class="col-12">
         <button type="submit" class="btn btn-primary">Salva</button>
     </div>
 </form>
+</div>

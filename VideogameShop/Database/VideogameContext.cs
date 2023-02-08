@@ -16,6 +16,12 @@ namespace VideogameShop.Database
 
         public DbSet<Models.Console> Consoles { get; set; }
 
+        public DbSet<Fornitore> Fornitori { get; set; }
+
+        public DbSet<Carrello> Carrelli { get; set; }
+
+        public DbSet<MessaggioPrivato> Messaggi { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source = localhost; Initial Catalog = VideoGameDB; Integrated Security = True; Pooling = False;TrustServerCertificate=True");

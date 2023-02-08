@@ -1,4 +1,6 @@
-﻿namespace VideogameShop.Models
+﻿using System.Text.Json.Serialization;
+
+namespace VideogameShop.Models
 {
     public class Console
     {
@@ -6,6 +8,7 @@
 
         public string Name { get; set; }
 
+        [JsonIgnore]
         public List<Videogioco>? ListaGiochi { get; set; }
 
         public Console() { }

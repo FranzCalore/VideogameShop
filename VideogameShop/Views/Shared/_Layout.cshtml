@@ -113,6 +113,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="testo text-end">
+                    <a asp-controller="Messaggi" asp-action="Index">Placeholder Lettera</a>
+                    <a asp-controller="Home" asp-action="VistaCarrello">
+                        <p class="text-light">Carrello: @Carrello.CarrelloCorrente.ProdottiAcquistati.Count() </p>
+                    </a>
+                </div>
                 <div>
                     <partial name="_LoginPartial" />
                 </div>

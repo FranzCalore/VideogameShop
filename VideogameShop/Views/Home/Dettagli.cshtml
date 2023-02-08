@@ -10,7 +10,7 @@
         <div class="col-5">
     <div><p>@Model.Videogioco.Descrizione</p></div>
             <h3 class="text-center pt-4">@Model.Videogioco.Prezzo €</h3>
-            <form asp-controller="Home" asp-action="Compra" method="post">
+            <form asp-controller="Home" asp-action="AggiungiCarrello" method="post">
                 @Html.AntiForgeryToken()
                 <input asp-for="Acquisto.VideogiocoId" type="hidden" value="@Model.Videogioco.Id" />
                 <label>Numero Copie:</label>

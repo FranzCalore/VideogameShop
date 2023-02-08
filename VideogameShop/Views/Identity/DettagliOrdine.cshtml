@@ -1,0 +1,18 @@
+﻿@model Carrello
+
+<div class="backgroundOpaco p-3 text-center">
+
+<p>Ordine del @Model.DataOra.Value.ToShortDateString()</p>
+
+<p>Stato Ordine:    IN PREPARAZIONE</p>
+
+<p>Prodotti Acquistati:</p>
+
+@foreach(Acquisto acquisto in Model.ProdottiAcquistati)
+{
+    <p>- @acquisto.Videogioco.Nome  x @acquisto.Quantita</p>
+}
+
+<p>Spesa Totale: @Model.PrezzoTotale</p>
+
+</div>

@@ -22,6 +22,36 @@ namespace VideogameShop.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AcquistoCarrello", b =>
+                {
+                    b.Property<int>("CarrelliId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProdottiAcquistatiAcquistoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CarrelliId", "ProdottiAcquistatiAcquistoId");
+
+                    b.HasIndex("ProdottiAcquistatiAcquistoId");
+
+                    b.ToTable("AcquistoCarrello");
+                });
+
+            modelBuilder.Entity("ConsoleVideogioco", b =>
+                {
+                    b.Property<int>("ListaConsoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ListaGiochiId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ListaConsoleId", "ListaGiochiId");
+
+                    b.HasIndex("ListaGiochiId");
+
+                    b.ToTable("ConsoleVideogioco");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -244,6 +274,101 @@ namespace VideogameShop.Migrations
                     b.ToTable("Acquisto");
                 });
 
+            modelBuilder.Entity("VideogameShop.Models.Carrello", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("DataOra")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NomeUtente")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("PrezzoTotale")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Carrelli");
+                });
+
+            modelBuilder.Entity("VideogameShop.Models.Console", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Consoles");
+                });
+
+            modelBuilder.Entity("VideogameShop.Models.Fornitore", b =>
+                {
+                    b.Property<int>("FornitoreId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FornitoreId"));
+
+                    b.Property<string>("FornitoreNome")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.HasKey("FornitoreId");
+
+                    b.ToTable("Fornitore");
+                });
+
+            modelBuilder.Entity("VideogameShop.Models.MessaggioPrivato", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("DataOra")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DestinatarioId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("MessaggioLetto")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MittenteId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TestoMessaggio")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Titolo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DestinatarioId");
+
+                    b.HasIndex("MittenteId");
+
+                    b.ToTable("Messaggi");
+                });
+
             modelBuilder.Entity("VideogameShop.Models.Rifornimento", b =>
                 {
                     b.Property<int>("Id")
@@ -255,9 +380,8 @@ namespace VideogameShop.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("NomeFornitore")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("FornitoreId")
+                        .HasColumnType("int");
 
                     b.Property<double>("Prezzo")
                         .HasColumnType("float");
@@ -265,10 +389,12 @@ namespace VideogameShop.Migrations
                     b.Property<int>("Quantita")
                         .HasColumnType("int");
 
-                    b.Property<int>("VideogiocoId")
+                    b.Property<int?>("VideogiocoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FornitoreId");
 
                     b.HasIndex("VideogiocoId");
 
@@ -335,6 +461,36 @@ namespace VideogameShop.Migrations
                     b.ToTable("Videogiochi");
                 });
 
+            modelBuilder.Entity("AcquistoCarrello", b =>
+                {
+                    b.HasOne("VideogameShop.Models.Carrello", null)
+                        .WithMany()
+                        .HasForeignKey("CarrelliId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VideogameShop.Models.Acquisto", null)
+                        .WithMany()
+                        .HasForeignKey("ProdottiAcquistatiAcquistoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ConsoleVideogioco", b =>
+                {
+                    b.HasOne("VideogameShop.Models.Console", null)
+                        .WithMany()
+                        .HasForeignKey("ListaConsoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VideogameShop.Models.Videogioco", null)
+                        .WithMany()
+                        .HasForeignKey("ListaGiochiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -397,13 +553,32 @@ namespace VideogameShop.Migrations
                     b.Navigation("Videogioco");
                 });
 
+            modelBuilder.Entity("VideogameShop.Models.MessaggioPrivato", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Destinatario")
+                        .WithMany()
+                        .HasForeignKey("DestinatarioId");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Mittente")
+                        .WithMany()
+                        .HasForeignKey("MittenteId");
+
+                    b.Navigation("Destinatario");
+
+                    b.Navigation("Mittente");
+                });
+
             modelBuilder.Entity("VideogameShop.Models.Rifornimento", b =>
                 {
+                    b.HasOne("VideogameShop.Models.Fornitore", "Fornitore")
+                        .WithMany("Rifornimenti")
+                        .HasForeignKey("FornitoreId");
+
                     b.HasOne("VideogameShop.Models.Videogioco", "Videogioco")
                         .WithMany("ListaRifornimenti")
-                        .HasForeignKey("VideogiocoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VideogiocoId");
+
+                    b.Navigation("Fornitore");
 
                     b.Navigation("Videogioco");
                 });
@@ -417,6 +592,11 @@ namespace VideogameShop.Migrations
                         .IsRequired();
 
                     b.Navigation("Tipologia");
+                });
+
+            modelBuilder.Entity("VideogameShop.Models.Fornitore", b =>
+                {
+                    b.Navigation("Rifornimenti");
                 });
 
             modelBuilder.Entity("VideogameShop.Models.Tipologia", b =>
