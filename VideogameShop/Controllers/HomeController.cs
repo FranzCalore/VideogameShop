@@ -14,6 +14,20 @@ namespace VideogameShop.Controllers
         {          
             return View();
         }
+        public ActionResult Play()
+        {
+            return View();
+        }
+
+        public ActionResult Xbox()
+        {
+            return View();
+        }
+
+        public ActionResult Nin()
+        {
+            return View();
+        }
 
         // GET: HomeController/Details/5
         public ActionResult Dettagli(int id)

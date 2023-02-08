@@ -31,7 +31,19 @@ body {
 }
 
 #sconti {
-    background-image: url(https://png.pngtree.com/background/20220725/original/pngtree-big-sale-sticker-pattern-seamless-vector-repeat-geometric-yellow-for-any-picture-image_1777322.jpg);
+    background-image: url(/img/sconti-ridotto.png) !important;
+    background-repeat: repeat;
+}
+#scontiplay {
+    background-image: url(/img/sconti-ridotto-play.png) !important;
+    background-repeat: repeat;
+}
+#scontinin {
+    background-image: url(/img/sconti-ridotto-nin.png) !important;
+    background-repeat: repeat;
+}
+#scontixbox {
+    background-image: url(/img/sconti-ridotto-xbox.png) !important;
     background-repeat: repeat;
 }
 
@@ -50,7 +62,19 @@ body {
 }
 
 #bestseller {
-    background-image: url(https://www.piuvenduti.it/wp-content/uploads/2020/04/pi%C3%B9.venduti-e1586682766814.jpg);
+    background-image: url(/img/migliori-ridotto.png) !important;
+    background-repeat: repeat;
+}
+#bestsellerplay {
+    background-image: url(/img/migliori-ridotto-play.png) !important;
+    background-repeat: repeat;
+}
+#bestsellernin {
+    background-image: url(/img/migliori-ridotto-nin.png) !important;
+    background-repeat: repeat;
+}
+#bestsellerxbox {
+    background-image: url(/img/migliori-ridotto-xbox.png) !important;
     background-repeat: repeat;
 }
 
@@ -73,6 +97,11 @@ body {
 }
 
 .imgbottone {
+    height: 75px;
+    width: 75px;
+}
+
+.imgConsole {
     height: 100px;
     width: 100px;
 }
@@ -267,3 +296,15 @@ border-color: #cc4b37;
     margin: auto;
     padding:2px;
 }
+}
+
+#bg-play {
+    background-color:rgb(230,230,230) !important;
+}
+#bg-nin {
+    background-color: rgb(230,230,230) !important;
+}
+#bg-xbox {
+    background-color: rgb(26,26,28) !important;
+}
+
