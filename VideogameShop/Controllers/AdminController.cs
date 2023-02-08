@@ -166,6 +166,7 @@ namespace VideogameShop.Controllers
                     videogioco.Foto = formData.Videogioco.Foto;
                     videogioco.Prezzo = formData.Videogioco.Prezzo;
                     videogioco.TipologiaId = formData.Videogioco.TipologiaId;
+                    videogioco.FotoOrizzontale = formData.Videogioco.FotoOrizzontale;
                     videogioco.ListaConsole.Clear();
                     if (formData.ListaIdConsole is not null)
                     {

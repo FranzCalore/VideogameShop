@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -31,7 +32,8 @@ namespace VideogameShop.Models
         public double Prezzo { get; set; }
 
         [Range(0,int.MaxValue)]
-        public int? QuantitaDisponibile { get; set; }
+        [DefaultValue(0)]
+        public int QuantitaDisponibile { get; set; }
 
         public int TipologiaId { get; set; }
         public Tipologia? Tipologia { get; set; }
@@ -42,7 +44,8 @@ namespace VideogameShop.Models
 
         public List<Console>? ListaConsole { get; set; }
 
-        public int? NumeroLike { get; set; }
+        [DefaultValue(0)]
+        public int NumeroLike { get; set; }
 
         //Costruttori:
 

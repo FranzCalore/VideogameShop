@@ -260,3 +260,10 @@ border-color: #cc4b37;
 .user_card-content {
     pointer-events: all;
 }
+
+.testoCarosello {
+    background:#000000ca;
+    max-width: max-content;
+    margin: auto;
+    padding:2px;
+}
