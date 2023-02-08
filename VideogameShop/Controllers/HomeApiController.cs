@@ -19,7 +19,7 @@ namespace VideogameShop.Controllers
             List<Videogioco> ListaVideogiochi = new();
             if(search is null || search == "")
             {
-                ListaVideogiochi = db.Videogiochi.ToList();
+                ListaVideogiochi = db.Videogiochi.OrderByDescending(v=>v.NumeroLike).ToList();
             }
             else
             {

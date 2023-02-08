@@ -16,6 +16,8 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+
+
 var scope = app.Services
     .GetService<IServiceScopeFactory>()?
     .CreateScope();
