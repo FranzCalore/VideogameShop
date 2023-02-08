@@ -22,6 +22,10 @@ namespace VideogameShop.Models
         [Url(ErrorMessage = "L'url inserito è invalido!")]
         public string Foto { get; set; }
 
+        [Column(TypeName = "varchar(300)")]
+        [Url(ErrorMessage = "L'url inserito è invalido!")]
+        public string? FotoOrizzontale { get; set; }
+
         [Required(ErrorMessage = "Il prezzo del videogioco è obbligatorio")]
         [Range(0, 10000, ErrorMessage = "Il prezzo deve essere superiore a 0!")]
         public double Prezzo { get; set; }
