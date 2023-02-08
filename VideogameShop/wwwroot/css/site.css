@@ -1,7 +1,3 @@
-:root {
-    --card-color: rgb(23,23,23);
-}
-
 html {
   font-size: 14px;
 }
@@ -161,8 +157,8 @@ border-color: #cc4b37;
 
 .user_card {
     background-color: rgba(255, 255, 255, 0.1);
-    height: 395px;
-    width: 348px;
+    height: 375px;
+    width: 300px;
     border-radius: 10px;
     cursor: pointer;
     position: relative;
@@ -173,7 +169,7 @@ border-color: #cc4b37;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    max-width: 1450px;
+    max-width: 920px;
     width: calc(100% - 20px);
     cursor: pointer;
 }
@@ -190,7 +186,7 @@ border-color: #cc4b37;
 }
 
 .user_card_body {
-    margin-top: 30px;
+    margin-top: 10px;
     display: flex;
     justify-content: space-evenly;
 }
@@ -199,22 +195,22 @@ border-color: #cc4b37;
     color: white;
 }
 
-#user_cards:hover > .user_card > .user_card_border {
+#user_cards:hover > .user_card > .card_border {
     opacity: 1;
 }
 
-.user_card:hover::before{
+.user_card:hover::before {
     opacity: 1;
     pointer-events: none;
 }
 
 .user_card::before,
-.user_card > .user_card_border {
+.user_card > .card_border {
     border-radius: inherit;
     content: "";
-    height: 100%;  
+    height: 100%;
     left: 0px;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 500ms;
     position: absolute;
     top: 0px;
@@ -224,35 +220,22 @@ border-color: #cc4b37;
 }
 
 .user_card::before {
-    background: radial-gradient( 
-    800px circle at var(--mouse-x) var(--mouse-y),
-    rgba(255,255,255, 0.06),
-    transparent 40%
-    );
+    background: radial-gradient( 800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255, 0.06), transparent 40% );
     z-index: 3;
     pointer-events: none;
 }
 
-.user_card > .user_card_border {
-    background: radial-gradient( 
-    400px circle at var(--mouse-x) var(--mouse-y), 
-    rgba(255,255,255, 0.3),
-    transparent 40%
-    );
+.user_card > .card_border {
+    background: radial-gradient( 400px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255, 0.03), transparent 40% );
     z-index: 1;
 }
 
-.user_card > .user_card_content {
-    background-color: var(--card-color);
+.user_card > .card-content {
+    background-color: rgb(23, 23, 23);
     border-radius: inherit;
-    height: calc(100% - 4px);
-    margin-top: 2px;
-    width: 344px;
-    position: relative;
-    left: -10px;
+    height: calc(100% - 2px);
+    margin: 1px;
+    width: calc(100% - 2px);
+    position:relative;
     z-index: 2;
-}
-
-.user_card-content {
-    pointer-events: all;
 }
