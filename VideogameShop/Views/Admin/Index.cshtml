@@ -1,6 +1,6 @@
 ﻿@model List<Videogioco>
 
-<main class="container backgroundOpaco p-4">
+<main class="user_container backgroundOpaco p-lg-4 p-0 mx-0 mx-lg-5">
 @if (Model.Count == 0)
 {
     <h3>Non sono presenti Videogiochi nel Database</h3>
@@ -10,17 +10,15 @@ else
 {
         <a class="btn btn-primary my-3" href="@Url.Action("Crea","Admin")">Aggiungi Videogioco</a>
         <h1>Lista Videogiochi</h1>
-        <table class="table table-hover my-5 text-center">
+        <table class="table table-hover text-center col-12 col-lg-10">
             <thead>
                 <tr>
                     <th scope="col">Nome</th>
                     <th scope="col"></th>
                     <th scope="col">Tipologia</th>
                     <th scope="col">Prezzo</th>
-                    <th></th>
-                    <th></th>
-                    <th>Copie Disponibili</th>
-                    <th></th>
+                    <th scope="col"></th>
+                    <th scope="col">Copie Disponibili</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,10 +38,10 @@ else
                         <td><img src="@videogioco.Foto" class="img-fluid" alt="@videogioco.Nome" style="max-width:100px"></td>
                         <td>@videogioco.Tipologia.TipologiaNome</td>
                         <td>@videogioco.Prezzo €</td>
-                        <td><a class="btn btn-primary" href="@Url.Action("Modifica","Admin", new{id=videogioco.Id})">Modifica Videogioco</a></td>
-                        <td><a class="btn btn-danger" href="@Url.Action("Elimina","Admin", new{id=videogioco.Id})">Elimina Videogioco</a></td>
+                        <td><a class="btn btn-primary" href="@Url.Action("Modifica","Admin", new{id=videogioco.Id})">Modifica Videogioco</a><br>
+                            <a class="btn btn-danger mt-2" href="@Url.Action("Elimina","Admin", new{id=videogioco.Id})">Elimina Videogioco</a>
+                        </td>
                         <td>@stringaQuantita</td>
-                        <td><a class="btn btn-success" href="@Url.Action("Dettagli","Admin", new{id=videogioco.Id})">Rifornisci</a></td>
                     </tr>
                 }
             </tbody>
