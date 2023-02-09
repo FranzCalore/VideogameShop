@@ -76,23 +76,24 @@
                         `
 
 
-                                                                    <div class="user_card">
-                                                                    <div class="user_card_border"></div>
-                                                                    <div class="user_card_content">
-                                                                    <a class="card_link" href="/Home/Dettagli/${videogioco.id}">
-                                                                        <img style="aspect-ratio:4/4" class="card_img" src="${videogioco.foto}" alt="${videogioco.nome}">
-                                                                        <div class="user_card_body">
-                                                                        <h4 class="card_title">${videogioco.nome}</h4>
-                                                                        <p>${prezzo} €</p>
-                                                                    </a>
+                                            <div class="user_card">
+                                            <div class="user_card_border"></div>
+                                            <div class="user_card_content">
+                                            <a class="card_link" href="/Home/Dettagli/${videogioco.id}">
+                                                <img style="aspect-ratio:4/4" class="card_img" src="${videogioco.foto}" alt="${videogioco.nome}">
+                                                <div class="user_card_body">
+                                                <h4 class="card_title">${videogioco.nome}</h4>
+                                                <p>${prezzo} €</p>
+                                            </a>
+                                                    </div>
+                                            <button class="button button-like botono${videogioco.id}">
+                                            ❤
+                                            <span class="spano${videogioco.id}">${videogioco.numeroLike} Like</span>
+                                            </button>
+                                            </div>
+                                            </div>
+                                            </div>
 
-                                                                    <button class="button button-like botono${videogioco.id}">
-                                                                    ❤
-                                                                    <span class="spano${videogioco.id}">${videogioco.numeroLike} Like</span>
-                                                                    </button>
-                                                                    </div>
-                                                                    </div>
-                                                                    </div>
 
                                                                                                     `
 
