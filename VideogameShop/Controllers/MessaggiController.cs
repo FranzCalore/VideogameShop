@@ -49,6 +49,15 @@ namespace VideogameShop.Controllers
             db.SaveChanges();
             return View(messaggio);
         }
+
+        public IActionResult EliminaMessaggio(int id)
+        {
+            using VideogameContext db = new();
+            MessaggioPrivato messaggio = db.Messaggi.Where(m => m.Id == id).Include(m => m.Mittente).FirstOrDefault();
+            db.Remove(messaggio);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 
 }
