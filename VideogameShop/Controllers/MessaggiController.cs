@@ -44,7 +44,7 @@ namespace VideogameShop.Controllers
         public IActionResult Messaggio(int id)
         {
             using VideogameContext db = new();
-            MessaggioPrivato messaggio = db.Messaggi.Where(m => m.Id == id).FirstOrDefault();
+            MessaggioPrivato messaggio = db.Messaggi.Where(m => m.Id == id).Include(m=>m.Mittente).FirstOrDefault();
             messaggio.MessaggioLetto = true;
             db.SaveChanges();
             return View(messaggio);

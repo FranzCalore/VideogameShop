@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VideogameShop.Database;
 
@@ -11,9 +12,11 @@ using VideogameShop.Database;
 namespace VideogameShop.Migrations
 {
     [DbContext(typeof(VideogameContext))]
-    partial class VideogameContextModelSnapshot : ModelSnapshot
+    [Migration("20230209102734_RifornimentoSistemato")]
+    partial class RifornimentoSistemato
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -380,7 +383,7 @@ namespace VideogameShop.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("FornitoreId")
+                    b.Property<int>("FornitoreId")
                         .HasColumnType("int");
 
                     b.Property<double>("Prezzo")
@@ -572,7 +575,9 @@ namespace VideogameShop.Migrations
                 {
                     b.HasOne("VideogameShop.Models.Fornitore", "Fornitore")
                         .WithMany("Rifornimenti")
-                        .HasForeignKey("FornitoreId");
+                        .HasForeignKey("FornitoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("VideogameShop.Models.Videogioco", "Videogioco")
                         .WithMany("ListaRifornimenti")

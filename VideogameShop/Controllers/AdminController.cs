@@ -187,8 +187,6 @@ namespace VideogameShop.Controllers
         }
 
         // POST: AdminController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Elimina(int id)
         {
             VideogameContext db = new VideogameContext();
@@ -199,7 +197,7 @@ namespace VideogameShop.Controllers
             }
             else
             {
-                db.Remove(videogioco);
+                db.Videogiochi.Remove(videogioco);
                 db.SaveChanges();
             }
             return RedirectToAction("Index");
