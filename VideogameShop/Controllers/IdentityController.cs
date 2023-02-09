@@ -67,7 +67,7 @@ namespace VideogameShop.Controllers
         public IActionResult GestisciUtente(UtenteRuoloView formData)
         {
             using VideogameContext db = new();
-            if (!ModelState.IsValid || formData.RuoloUtente.Id=="")
+            if (!ModelState.IsValid || formData.RuoloUtente.Id is null)
             {
                 var Ruoli = db.Roles.ToList();
                 formData.Ruoli = Ruoli;
@@ -101,17 +101,6 @@ namespace VideogameShop.Controllers
                 db.UserRoles.Add(identityUserRole);
             }
             db.SaveChanges();
-            return RedirectToAction("Gestisci");
-        }
-
-        [Authorize(Roles = "Admin")]
-        public IActionResult Elimina(string username)
-        {
-            using VideogameContext db = new();
-            var Utente = db.Users.Where(u => u.UserName == username).FirstOrDefault();
-            db.Remove(Utente);
-            db.SaveChanges();
-
             return RedirectToAction("Gestisci");
         }
         public IActionResult MieiOrdini(string username)
