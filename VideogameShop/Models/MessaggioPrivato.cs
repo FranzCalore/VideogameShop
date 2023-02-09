@@ -8,7 +8,7 @@ namespace VideogameShop.Models
         public int Id { get; set; }
 
         public string Titolo { get; set; }
-        public IdentityUser Mittente { get; set; }
+        public IdentityUser? Mittente { get; set; }
 
         public IdentityUser Destinatario { get; set; }
 
