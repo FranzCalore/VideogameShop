@@ -14,17 +14,27 @@ namespace VideogameShop.Controllers
         {          
             return View();
         }
+
+        [Route("/Playstation")]
         public ActionResult Play()
         {
             return View();
         }
 
+        [Route("/Xbox")]
         public ActionResult Xbox()
         {
             return View();
         }
 
+        [Route("/Switch")]
         public ActionResult Nin()
+        {
+            return View();
+        }
+
+        [Route("/PC")]
+        public ActionResult Pc()
         {
             return View();
         }
