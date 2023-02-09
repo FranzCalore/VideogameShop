@@ -88,6 +88,7 @@ body {
 }
 
 .testogrande {
+    justify-self: center;
     font-family: fantasy;
     font-size: 45px;
     font-style: normal;
@@ -194,7 +195,7 @@ border-color: #cc4b37;
 
 .user_card {
     background-color: rgba(255, 255, 255, 0.1);
-    height: 395px;
+    height: 475px;
     width: 348px;
     border-radius: 10px;
     cursor: pointer;
@@ -202,7 +203,7 @@ border-color: #cc4b37;
 }
 
 #user_cards {
-    align-items: center;
+    justify-content: center;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
